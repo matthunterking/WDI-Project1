@@ -24,6 +24,10 @@ p {
   justify-content: space-between;
   flex-direction: column;
 }
+.inactive {
+  background-color: grey;
+}
+
 .imageHolder{
   width: 100%;
   height: 400px;

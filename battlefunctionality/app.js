@@ -7,10 +7,11 @@ $(function(){
   // player name
   const player1 = 'Matt';
 
-  const player2 = 'Gerry';
+  const player2 = 'Dave';
 
-  let winner;
   let result;
+
+
 
 //Codemon
   //codemon name
@@ -62,49 +63,93 @@ $(function(){
   //all the move buttons (with event listeners)
   const $attButtP1A1 = $('.player1Options button[name="attack1"]');
   const $attButtP1A2 = $('.player1Options button[name="attack2"]');
-  const $attButtP1A3 = $('.player1Options button[name="attack3"]' );
+  const $attButtP1A3 = $('.player1Options button[name="attack3"]');
   const $attButtP1A4 = $('.player1Options button[name="attack4"]');
   const $attButtP2A1 = $('.player2Options button[name="attack1"]');
   const $attButtP2A2 = $('.player2Options button[name="attack2"]');
-  const $attButtP2A3 = $('.player2Options button[name="attack3"]  ');
-  const $attButtP2A4 = $('.player2Options button[name="attack4"]' ) ;
+  const $attButtP2A3 = $('.player2Options button[name="attack3"]');
+  const $attButtP2A4 = $('.player2Options button[name="attack4"]');
+
+  //the playerDivs
+  const $player1display = $('#player1Screen');
+  const $player2display = $('#player2Screen');
+
 
   $attButtP1A1.text(move1.name);
   $attButtP1A2.text(move2.name);
   $attButtP1A3.text(move3.name);
   $attButtP1A4.text(move4.name);
+
   $attButtP2A1.text(move1.name);
   $attButtP2A2.text(move2.name);
   $attButtP2A3.text(move3.name);
   $attButtP2A4.text(move4.name);
 
+//change turns
+
+  const currentPlayer = 1;
+
+  const changeTurns = function() {
+    // playerturn = playerturn === 1 ? 2 : 1;
+    if (playerturn === 0) {
+      console.log('GAME OVER');
+    } else if (playerturn === 1) {
+      playerturn = 2;
+    } else {
+      playerturn = 1;
+    }
+    $player1display.toggleClass('inactive');
+    $player2display.toggleClass('inactive');
+  };
+
+
+  let playerturn = 1;
+
+
+
   //Event listeners
   //attack buttons
+
   $attButtP1A1.on('click', function(){
-    attack(move1, yavaScript, htmMel, 1);
+    if(playerturn === 1){
+      attack(move1, yavaScript, htmMel, 1);
+    }
   });
   $attButtP1A2.on('click', function(){
-    attack(move2, yavaScript, htmMel, 1);
+    if(playerturn === 1){
+      attack(move2, yavaScript, htmMel, 1);
+    }
   });
   $attButtP1A3.on('click', function(){
-    attack(move3, yavaScript, htmMel, 1);
+    if(playerturn === 1){
+      attack(move3, yavaScript, htmMel, 1);
+    }
   });
   $attButtP1A4.on('click', function(){
-    attack(move4, yavaScript, htmMel, 1);
+    if(playerturn === 1){
+      attack(move4, yavaScript, htmMel, 1);
+    }
   });
   $attButtP2A1.on('click', function(){
-    attack(move1, htmMel, yavaScript, 2);
+    if(playerturn === 2){
+      attack(move1, htmMel, yavaScript, 2);
+    }
   });
   $attButtP2A2.on('click', function(){
-    attack(move2, htmMel, yavaScript, 2);
+    if(playerturn === 2){
+      attack(move2, htmMel, yavaScript, 2);
+    }
   });
   $attButtP2A3.on('click', function(){
-    attack(move3, htmMel, yavaScript, 2);
+    if(playerturn === 2){
+      attack(move3, htmMel, yavaScript, 2);
+    }
   });
   $attButtP2A4.on('click', function(){
-    attack(move4, htmMel, yavaScript, 2);
+    if(playerturn === 2){
+      attack(move4, htmMel, yavaScript, 2);
+    }
   });
-
   //codemon HP span
   const $p1HP = $('#p1HP');
   const $p2HP = $('#p2HP');
@@ -123,7 +168,8 @@ $(function(){
   const attack = function(move, attcodemon, defCodemon, playerID) {
     if (Math.floor(Math.random()*10) < 2) {
       $messageDisplay.text(`${attcodemon.name}'s attack missed!'`);
-      return;
+      changeTurns();
+      checkwinner();
     } else {
       $messageDisplay.text(`${attcodemon.name} used ${move.name}!`);
       const basePower = move.basePower;
@@ -140,6 +186,7 @@ $(function(){
         $p1HP.text(defCodemon.hp);
       }
     }
+    changeTurns();
   };
 
 
@@ -150,7 +197,6 @@ $(function(){
       result = 0;
     } else {
       result = basePower + (attack-defence) +(Math.floor(Math.random()*10)+1);
-      console.log(result);
     }
     return result;
   };
@@ -164,13 +210,14 @@ $(function(){
     if (htmMel.hp < 0) {
       htmMel.hp = 0;
       $messageDisplay.text(`${player1} wins!`);
+      playerturn = 0;
     } else if(yavaScript.hp < 0) {
       yavaScript.hp = 0;
       $messageDisplay.text(`${player2} wins!`);
+      playerturn = 0;
     } else {
       return;
     }
   };
-
 
 });
