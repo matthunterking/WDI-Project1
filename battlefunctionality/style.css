@@ -47,3 +47,8 @@ button {
   height: 40px;
   width: 60px;
 }
+
+.messageBox {
+  font-size: 40px;
+  color: blue;
+}
