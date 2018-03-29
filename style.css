@@ -1,0 +1,20 @@
+h1 {
+  width: 100%;
+  margin: 20px;
+  color: #3c5aa6;
+  font-size: 36px;
+}
+
+.codemon1 {
+  height: 100px;
+  width: 100px;
+  margin: 100px;
+  background-color: red;
+}
+
+.codemon2 {
+  height: 100px;
+  width: 100px;
+  margin: 100px;
+  background-color: blue;
+}
