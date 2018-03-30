@@ -1,24 +1,28 @@
 $(function(){
-//battle function javascript
 
+let player1;
+let player2;
 
-//Variables which need to be stored/called
-//players
-  // player name
-  const player1 = 'Matt';
+  //Start start page
+  //get value from input name and store in in player1 and player2
+  //move onto next page
+  $('#startGame').on('click', function(){
+    player1 = $('.player1Name').val();
+    player2 = $('.player2Name').val();
+    if (player1 && player2) {
+      $('.startPage').addClass('hidden');
+      $('.characterselection').removeClass('hidden');
+    } else {
+      alert('Please enter a name for both player 1 and player 2');
+    }
+    $('.player1Name').text(player1);
+    $('.player2Name').text(player2);
+  });
 
-  const player2 = 'Dave';
+//characterselection
 
-  let result;
-
-
-
-//Codemon
-  //codemon name
-  //codemon attack stat
-  //codemon defence stat
   class Codemon {
-    constructor(name, attack, defence, hp, move1, move2, move3, move4) {
+    constructor(name, attack, defence, hp, move1, move2, move3, move4, image) {
       this.name = name;
       this.attack = attack;
       this.defence = defence;
@@ -27,14 +31,79 @@ $(function(){
       this.move2 = move2;
       this.move3 = move3;
       this.move4 = move4;
+      this.image = image;
     }
   }
 
-  const yavaScript = new Codemon('YavaScript', 3, 2, 100, 'move1', 'move2', 'move3', 'move4');
-  const htmMel = new Codemon('HTM-Mel', 1, 4, 100);
+  const yavaScript = new Codemon('YavaScript', 3, 2, 100, 'move1', 'move2', 'move3', 'move4', 'http://guidesmedia.ign.com/guides/059687/images/blackwhite/pokemans_026.gif');
+  const htmMel = new Codemon('HTM-Mel', 1, 4, 100, 'move1', 'move2', 'move3', 'move4', 'http://guidesmedia.ign.com/guides/059687/images/blackwhite/pokemans_091.gif');
+  const cssMess = new Codemon('CS-Mess', 2, 3, 100, 'move1', 'move2', 'move3', 'move4', 'https://danielsfunny.files.wordpress.com/2017/11/charmander.png?w=640');
+
+  const codemon = [yavaScript, htmMel, cssMess];
+  let index = 1;
+  let player1chosen = codemon[1];
+  let player2chosen = codemon[1];
 
 
-//moves
+
+  const choose = function(index, player) {
+    const current = codemon[index];
+    $(`.codemonName${player}`).text(current.name);
+    $(`.codemonAttack${player}`).text(current.attack);
+    $(`.codemonDefence${player}`).text(current.defence);
+    $(`.codemonMove1${player}`).text(current.move1);
+    $(`.codemonMove2${player}`).text(current.move2);
+    $(`.codemonMove3${player}`).text(current.move3);
+    $(`.codemonMove4${player}`).text(current.move4);
+    $(`.codemonImage${player}`).css('background-image', `url(${current.image})`);
+  };
+
+  choose(1, 'P1');
+  choose(1, 'P2');
+
+  $('button[name="next"]').on('click', function(){
+    if(index < codemon.length) {
+      choose(index, event.target.id);
+      currentCodemon(index);
+      index+=1;
+    } else {
+      index = 0;
+      currentCodemon(index);
+      choose(index, event.target.id);
+      index +=1;
+    }
+  });
+
+  $('button[name="previous"]').on('click', function(){
+    if(index < codemon.length) {
+      index-=1;
+      choose(index, event.target.id);
+      currentCodemon(index);
+      index = codemon.length;
+    } else {
+      index -=1;
+      choose(index, event.target.id);
+      currentCodemon(index);
+    }
+  });
+
+  const currentCodemon = function(index) {
+    if(event.target.id === 'P1') {
+      player1chosen = codemon[index];
+    } else {
+      player2chosen = codemon[index];
+    }
+  };
+
+
+  $('button[name="start"]').on('click', function(){
+    $('.characterselection').addClass('hidden');
+    $('.battle').removeClass('hidden');
+  });
+
+  let result;
+
+  //moves
   //move name
   //effect on codemon stats
   //base power
@@ -53,13 +122,13 @@ $(function(){
   const move3 = new Move('Install jQuery',10,0,0,'Increases your attack');
   const move4 = new Move('All the breakets {}()<>',5,5,10);
 
-//This game
+  //This game
 
-  $('#p1HP').text(yavaScript.hp); //replace with chosen pokemon later
-  $('#p2HP').text(htmMel.hp);
+  $('#p1HP').text(player1chosen.hp); //replace with chosen pokemon later
+  $('#p2HP').text(player2chosen.hp);
 
 
-//selectors
+  //selectors
   //all the move buttons (with event listeners)
   const $attButtP1A1 = $('.player1Options button[name="attack1"]');
   const $attButtP1A2 = $('.player1Options button[name="attack2"]');
@@ -85,9 +154,7 @@ $(function(){
   $attButtP2A3.text(move3.name);
   $attButtP2A4.text(move4.name);
 
-//change turns
-
-  const currentPlayer = 1;
+  //change turns
 
   const changeTurns = function() {
     // playerturn = playerturn === 1 ? 2 : 1;
@@ -114,42 +181,42 @@ $(function(){
 
   $attButtP1A1.on('click', function(){
     if(playerturn === 1){
-      attack(move1, yavaScript, htmMel, 1);
+      attack(move1, player1chosen, player2chosen, 1);
     }
   });
   $attButtP1A2.on('click', function(){
     if(playerturn === 1){
-      attack(move2, yavaScript, htmMel, 1);
+      attack(move2, player1chosen, player2chosen, 1);
     }
   });
   $attButtP1A3.on('click', function(){
     if(playerturn === 1){
-      attack(move3, yavaScript, htmMel, 1);
+      attack(move3, player1chosen, player2chosen, 1);
     }
   });
   $attButtP1A4.on('click', function(){
     if(playerturn === 1){
-      attack(move4, yavaScript, htmMel, 1);
+      attack(move4, player1chosen, player2chosen, 1);
     }
   });
   $attButtP2A1.on('click', function(){
     if(playerturn === 2){
-      attack(move1, htmMel, yavaScript, 2);
+      attack(move1, player2chosen, player1chosen, 2);
     }
   });
   $attButtP2A2.on('click', function(){
     if(playerturn === 2){
-      attack(move2, htmMel, yavaScript, 2);
+      attack(move2, player2chosen, player1chosen, 2);
     }
   });
   $attButtP2A3.on('click', function(){
     if(playerturn === 2){
-      attack(move3, htmMel, yavaScript, 2);
+      attack(move3, player2chosen, player1chosen, 2);
     }
   });
   $attButtP2A4.on('click', function(){
     if(playerturn === 2){
-      attack(move4, htmMel, yavaScript, 2);
+      attack(move4, player2chosen, player1chosen, 2);
     }
   });
   //codemon HP span
@@ -160,9 +227,9 @@ $(function(){
   const $messageDisplay = $('.messageBox');
 
 
-//functions
+  //functions
   //ACTIVE PLAYER
-    //Needs to disable the controls of the none active player
+  //Needs to disable the controls of the none active player
 
   //ATTACK
   //attack function
@@ -207,12 +274,12 @@ $(function(){
     //display message
     //Check for winner
   const checkwinner = function() {
-    if (htmMel.hp < 0) {
-      htmMel.hp = 0;
+    if (player2chosen.hp < 0) {
+      player2chosen.hp = 0;
       $messageDisplay.text(`${player1} wins!`);
       playerturn = 0;
-    } else if(yavaScript.hp < 0) {
-      yavaScript.hp = 0;
+    } else if(player1chosen.hp < 0) {
+      player1chosen.hp = 0;
       $messageDisplay.text(`${player2} wins!`);
       playerturn = 0;
     } else {

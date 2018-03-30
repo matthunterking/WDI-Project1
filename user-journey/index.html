@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src='app.js'></script>
+    <title>CODEMON BATTLE SCREEN</title>
+  </head>
+  <body>
+    <h1>CODÉMON</h1>
+    <section class="startPage">
+      <img src="./images/placeholderlogo.png" class='startLogo'>
+      <div class='startAnimationBox'></div>
+      <img src="./images/placeholderplayer.png" class='startplayer'>
+      <form>
+        <div class="playerNameInput">
+          <p>Enter player 1 name</p><input class="player1Name"></input>
+        </div>
+        <button type="button" name="button" id='startGame'>Fight!</button>
+        <div class="playerNameInput">
+          <p>Enter player 2 name</p><input class="player2Name"></input>
+          <button id="computer">Play against the computer</button>
+    </div>
+      </form>
+    </section>
+
+    <section class="characterselection hidden">
+      <div class="codemonSelection">
+        <p class="player1Name selectionScreenName"></p>
+        <div class="codemonWrapper">
+          <div class="codemonImageP1"></div>
+          <div class="codemonStats">
+            <span class='codemonNameP1'></span>
+            <p>Attack: <span class='codemonAttackP1'></span></p>
+            <p>Defence: <span class='codemonDefenceP1'></span></p>
+            <p>Moves</p>
+            <span class='codemonMove1P1'></span>
+            <span class='codemonMove2P1'></span>
+            <span class='codemonMove3P1'></span>
+            <span class='codemonMove4P1'></span>
+            </div>
+      </div>
+        <button type="button" name="previous" id="P1">Previous</button>
+        <button type="button" name="next" id="P1">Next</button>
+        <button type="button" name="button">I choose you!</button>
+        </div>
+      </div>
+      <div class="codemonSelection">
+        <p class="player2Name selectionScreenName"></p>
+        <div class="codemonImageP2"></div>
+        <div class="codemonStats">
+          <span class='codemonNameP2'></span>
+          <p>Attack: <span class='codemonAttackP2'></span></p>
+          <p>Defence: <span class='codemonDefenceP2'></span></p>
+          <p>Moves</p>
+          <span class='codemonMove1P2'></span>
+          <span class='codemonMove2P2'></span>
+          <span class='codemonMove3P2'></span>
+          <span class='codemonMove4P2'></span>
+        </div>
+        <button type="button" name="previous" id="P2">Previous</button>
+        <button type="button" name="next" id="P2">Next</button>
+        <button type="button" name="button">I choose you!</button>
+        </div>
+      </div>
+      <button type="button" name="start">Start Battle!</button>
+    </section>
+
+    <section class="battle hidden">
+
+      <div class='playerScreen' id='player1Screen'>
+        <div class='imageHolder'>
+          <div class='codemonImageP1'></div>
+      <div class='HPChart'>
+        <p>Player 1 HP <span id='p1HP'></span></p>
+      </div>
+      <div class='player1Options'>
+        <button type="button" name="attack1">Attack 1</button>
+        <button type="button" name="attack2">Attack 2</button>
+        <button type="button" name="attack3">Attack 3</button>
+        <button type="button" name="attack4">Attack 4</button>
+      </div>
+      </div>
+
+      <div class='playerScreen inactive' id='player2Screen'>
+        <div class='imageHolder'>
+          <div class='codemonImageP2'></div>
+        </div>
+      <div class='HPChart'>
+        <p>Player 2 HP <span id='p2HP'></span></p>
+      </div>
+      <div class='player2Options'>
+        <button type="button" name="attack1">Attack 1</button>
+        <button type="button" name="attack2">Attack 2</button>
+        <button type="button" name="attack3">Attack 3</button>
+        <button type="button" name="attack4">Attack 4</button>
+      </div>
+      </div>
+
+      <div class="messageBox"></div>
+
+    </section>
+
+    <section class='winner hidden'>
+
+    </section>
+  </body>
+</html>
