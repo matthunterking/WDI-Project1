@@ -1,0 +1,31 @@
+body {
+  box-sizing: border-box;
+  background: url(./images/background.jpg);
+  background: contain;
+  background-position: center;
+}
+
+.logo {
+  width: 20%;
+  position: relative;
+  left: 40%;
+  margin: 10px 0;
+}
+
+section {
+  width: 70%;
+  height: 700px;
+  border: 2px solid black;
+  margin: 0 auto;
+  background-color: rgb(250, 231, 251);
+}
+
+section {
+  &.hidden {
+    display: none;
+  }
+}
+
+.hidden {
+  display: none;
+}

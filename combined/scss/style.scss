@@ -1,0 +1,18 @@
+//Helpers
+@import "helpers/mixins";
+@import "helpers/variables";
+
+//Components
+@import 'components/startScreen';
+@import 'components/codemonSelection';
+@import 'components/battle';
+@import 'components/winnerReset';
+
+
+
+
+//Partials
+@import "partial/base";
+@import "partial/animations";
+@import "partial/buttons";
+@import "partial/typography";

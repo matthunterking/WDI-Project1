@@ -1,0 +1,308 @@
+.startLogo {
+  width: 50%;
+  display: block;
+  margin: 50px auto; }
+
+form {
+  position: relative;
+  height: 260px;
+  top: 50px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row; }
+
+.playerNameInput {
+  display: inline-block;
+  width: 40%;
+  font-size: 20px;
+  text-align: center; }
+
+input {
+  width: 80%;
+  height: 50px;
+  margin: 30px;
+  text-align: center;
+  font-size: 20px; }
+
+.characterselection {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  text-align: center;
+  font-size: 20px; }
+
+.codemonSelection {
+  width: 50%;
+  border: 2px solid black; }
+
+.codemonWrapper {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column; }
+
+.selectionScreenName {
+  margin: 10px;
+  width: 100%; }
+
+.codemonImageP2 {
+  width: 100%;
+  height: 300px; }
+
+.codemonImageP1 {
+  width: 100%;
+  height: 300px; }
+
+.codemonStats {
+  width: 100%;
+  height: 200px;
+  padding: 10px; }
+
+.yavaScript {
+  background-image: url("http://guidesmedia.ign.com/guides/059687/images/blackwhite/pokemans_026.gif");
+  background-size: cover; }
+
+section.battle {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column; }
+
+.battleArea {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: row; }
+
+.playerScreen {
+  width: 50%;
+  height: 550px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background: url(./images/battle-background.png);
+  background-size: cover;
+  background-position: -176px;
+  background-repeat: no-repeat; }
+
+.inactive {
+  opacity: 0.45; }
+
+.topHalf {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px; }
+
+.bottomHalf {
+  width: 100%;
+  height: 330px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.hpChart {
+  width: 48%;
+  height: 100px;
+  border: 2px solid black;
+  margin: 10px 0;
+  background-color: silver; }
+
+.front {
+  width: 46%;
+  height: 170px;
+  background-size: contain; }
+
+.back {
+  width: 50%;
+  height: 200px;
+  background-size: contain; }
+
+.player1Options {
+  display: flex;
+  flex-wrap: wrap; }
+
+.player2Options {
+  display: flex;
+  flex-wrap: wrap; }
+
+.messageBox {
+  width: 100%;
+  height: 143px;
+  text-align: center; }
+
+.p1barChart {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px; }
+
+.p1bar {
+  width: 80%;
+  height: 15px;
+  background-color: green;
+  transition-property: width;
+  transition-duration: 1s; }
+
+.p2barChart {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px; }
+
+.p2bar {
+  width: 80%;
+  height: 15px;
+  background-color: green;
+  transition-property: width;
+  transition-duration: 1s; }
+
+body {
+  box-sizing: border-box;
+  background: url(./images/background.jpg);
+  background: contain;
+  background-position: center; }
+
+.logo {
+  width: 20%;
+  position: relative;
+  left: 40%;
+  margin: 10px 0; }
+
+section {
+  width: 70%;
+  height: 700px;
+  border: 2px solid black;
+  margin: 0 auto;
+  background-color: #fae7fb; }
+
+section.hidden {
+  display: none; }
+
+.hidden {
+  display: none; }
+
+.startAnimationBox {
+  position: relative;
+  width: 20%;
+  height: 200px;
+  left: 40%;
+  display: inline-block;
+  animation: openingscreen 12s infinite;
+  animation-timing-function: steps(1, end); }
+
+@keyframes openingscreen {
+  0% {
+    background: url(./images/HTMel-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  20% {
+    background: url(./images/Yavascript-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  40% {
+    background: url(./images/CSS-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  60% {
+    background: url(./images/HTMel-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  80% {
+    background: url(./images/Yavascript-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  100% {
+    background: url(./images/CSS-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; } }
+button {
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  border: double;
+  font-size: 15px;
+  font-family: "IBM Plex Mono", monospace; }
+
+#startGame {
+  background-color: #25B702;
+  color: black;
+  margin: 30px; }
+
+#computerPlayer {
+  background-color: #EA9800;
+  width: 200px;
+  position: relative;
+  bottom: 20px; }
+
+button[name="start"] {
+  background-color: #D73F47;
+  position: absolute;
+  top: 700px;
+  width: 200px; }
+
+button[name="next"] {
+  background-color: #018ECC; }
+
+button[name="previous"] {
+  background-color: #018ECC; }
+
+button[name="attack1"] {
+  background-color: #D73F47;
+  width: 40%;
+  margin: 5px 5%; }
+
+button[name="attack2"] {
+  background-color: #EA9800;
+  width: 40%;
+  margin: 5px 5%; }
+
+button[name="attack3"] {
+  background-color: #25B702;
+  width: 40%;
+  margin: 5px 5%; }
+
+button[name="attack4"] {
+  background-color: #018ECC;
+  width: 40%;
+  margin: 5px 5%; }
+
+h1 {
+  display: none; }
+
+body {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 30px; }
+
+.codemonNameP1 {
+  font-weight: bolder;
+  font-size: 34px; }
+
+.codemonNameP2 {
+  font-weight: bolder;
+  font-size: 34px; }
+
+p {
+  padding: 10px; }
+
+label {
+  width: 10%;
+  height: 20px;
+  padding: 2px;
+  font-size: 15px;
+  color: #FFB400;
+  background-color: black;
+  display: inline-block; }
+
+/*# sourceMappingURL=style.css.map */

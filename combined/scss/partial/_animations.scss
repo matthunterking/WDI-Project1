@@ -1,0 +1,48 @@
+.startAnimationBox {
+  position: relative;
+  width: 20%;
+  height: 200px;
+  left: 40%;
+  display: inline-block;
+  animation: openingscreen 12s infinite;
+  animation-timing-function: steps(1, end);
+}
+
+@keyframes openingscreen{
+    0%{
+        background: url(./images/HTMel-front.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    20%{
+        background: url(./images/Yavascript-front.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    40%{
+        background: url(./images/CSS-front.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    60%{
+        background: url(./images/HTMel-front.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    80%{
+      background: url(./images/Yavascript-front.png);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    100%{
+      background: url(./images/CSS-front.png);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+}

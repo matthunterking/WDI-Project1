@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src='./js/app.js'></script>
+    <title>CODEMON!</title>
+  </head>
+  <body>
+    <h1>CODÉMON</h1>
+    <img class="logo" src="./css/images/CODEMON-logo.png" alt="">
+    <section class="startPage">
+      <img class="startLogo" src="./css/images/CODEMON-logo.png" alt="">
+      <div class='startAnimationBox'></div>
+      <form>
+        <div class="playerNameInput">
+          <p>Enter Player 1 Name</p><input class="player1Name"></input>
+        </div>
+        <button type="button" name="button" id='startGame'>Fight!</button>
+        <div class="playerNameInput">
+          <p>Enter Player 2 Name</p><input class="player2Name"></input>
+          <button type="button" name="button" id="computerPlayer">Play against the computer</button>
+    </div>
+      </form>
+    </section>
+
+    <section class="characterselection hidden">
+      <div class="codemonSelection">
+        <p class="player1Name selectionScreenName"></p>
+          <div class="codemonImageP1"></div>
+          <div class="codemonStats">
+            <span class='codemonNameP1'></span>
+            <p>Attack: <span class='codemonAttackP1'></span></p>
+            <p>Defence: <span class='codemonDefenceP1'></span></p>
+            <p>Moves</p>
+            <span class='codemonMove1P1'></span>
+            <span class='codemonMove2P1'></span>
+            <span class='codemonMove3P1'></span>
+            <span class='codemonMove4P1'></span>
+            </div>
+
+        <button type="button" name="previous" id="P1">Previous</button>
+        <button type="button" name="next" id="P1">Next</button>
+        </div>
+      </div>
+      <div class="codemonSelection computer">
+        <p class="player2Name selectionScreenName"></p>
+        <div class="codemonImageP2"></div>
+        <div class="codemonStats">
+          <span class='codemonNameP2'></span>
+          <p>Attack: <span class='codemonAttackP2'></span></p>
+          <p>Defence: <span class='codemonDefenceP2'></span></p>
+          <p>Moves</p>
+          <span class='codemonMove1P2'></span>
+          <span class='codemonMove2P2'></span>
+          <span class='codemonMove3P2'></span>
+          <span class='codemonMove4P2'></span>
+        </div>
+        <button type="button" name="previous" id="P2">Previous</button>
+        <button type="button" name="next" id="P2">Next</button>
+        </div>
+      </div>
+      <button type="button" name="start">Start Battle!</button>
+    </section>
+
+    <section class="battle hidden">
+      <div class='battleArea'>
+
+        <div class='playerScreen' id='player1Screen'>
+          <div class="topHalf">
+          <div class='codemonImageP2 front'></div>
+          <div class='hpChart hpChartP2'>
+            <div class="p2barChart">
+              <label>HP</label><div class="p2bar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="bottomHalf">
+          <div class='hpChart'>
+            <p>CODEMON NAME</P>
+            <div class="p1barChart">
+              <label>HP</label><div class="p1bar"></div>
+            </div>
+          </div>
+          <div class='codemonImageP1 back'></div>
+          <div class='player1Options'>
+            <button type="button" name="attack1">Attack 1</button>
+            <button type="button" name="attack2">Attack 2</button>
+            <button type="button" name="attack3">Attack 3</button>
+            <button type="button" name="attack4">Attack 4</button>
+          </div>
+      </div>
+      </div>
+
+      <div class='playerScreen inactive' id='player2Screen'>
+        <div class="topHalf">
+        <div class='codemonImageP1 front'></div>
+        <div class='hpChart hpChartP1'>
+          <div class="p1barChart">
+            <label>HP</label><div class="p1bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomHalf">
+        <div class='hpChart'>
+          <p>CODEMON NAME</P>
+          <div class="p2barChart">
+            <label>HP</label><div class="p2bar"></div>
+          </div>
+        </div>
+        <div class='codemonImageP2 back'></div>
+        <div class='player2Options'>
+          <button type="button" name="attack1">Attack 1</button>
+          <button type="button" name="attack2">Attack 2</button>
+          <button type="button" name="attack3">Attack 3</button>
+          <button type="button" name="attack4">Attack 4</button>
+        </div>
+    </div>
+      </div>
+
+    </div>
+    </div>
+      <div class="messageBox"></div>
+
+    </section>
+
+    <section class='winner hidden'>
+
+    </section>
+  </body>
+</html>

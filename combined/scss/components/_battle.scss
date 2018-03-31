@@ -1,0 +1,116 @@
+section {
+  &.battle {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  }
+}
+
+.battleArea {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+}
+
+.playerScreen {
+  width: 50%;
+  height: 550px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background: url(./images/battle-background.png);
+  background-size: cover;
+  background-position: -176px;
+  background-repeat: no-repeat;
+}
+.inactive {
+  opacity: 0.45;
+}
+.topHalf {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+}
+
+.bottomHalf {
+  width: 100%;
+  height: 330px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+  .hpChart {
+    width: 48%;
+    height: 100px;
+    border: 2px solid black;
+    margin: 10px 0;
+    background-color: silver;
+  }
+
+.front{
+    width: 46%;
+    height: 170px;
+    background-size: contain;
+  }
+
+.back {
+    width: 50%;
+    height: 200px;
+    background-size: contain;
+  }
+
+.player1Options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.player2Options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.messageBox {
+  width: 100%;
+  height: 143px;
+  text-align: center;
+}
+
+.p1barChart {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.p1bar {
+  width: 80%;
+  height: 15px;
+  background-color: green;
+  transition-property: width;
+  transition-duration: 1s;
+
+}
+
+.p2barChart {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.p2bar {
+  width: 80%;
+  height: 15px;
+  background-color: green;
+  transition-property: width;
+  transition-duration: 1s;
+
+}
