@@ -71,8 +71,12 @@
 
         <div class='playerScreen' id='player1Screen'>
           <div class="topHalf">
-          <div class='codemonImageP2 front'></div>
+            <div class="codemonimagewrapper">
+              <div class="impactAnimationP1 hidden"></div>
+              <div class='codemonImageP2 front'></div>
+            </div>
           <div class='hpChart hpChartP2'>
+            <span class='codemonNameP2'></span>
             <div class="p2barChart">
               <label>HP</label><div class="p2bar"></div>
             </div>
@@ -80,12 +84,15 @@
         </div>
         <div class="bottomHalf">
           <div class='hpChart'>
-            <p>CODEMON NAME</P>
+            <span class='codemonNameP1'></span>
             <div class="p1barChart">
               <label>HP</label><div class="p1bar"></div>
             </div>
           </div>
-          <div class='codemonImageP1 back'></div>
+          <div class="codemonimagewrapper">
+            <div class="impactAnimationP2 hidden"></div>
+            <div class='codemonImageP1 back'></div>
+          </div>
           <div class='player1Options'>
             <button type="button" name="attack1">Attack 1</button>
             <button type="button" name="attack2">Attack 2</button>
@@ -97,8 +104,12 @@
 
       <div class='playerScreen inactive' id='player2Screen'>
         <div class="topHalf">
-        <div class='codemonImageP1 front'></div>
+          <div class="codemonimagewrapper">
+            <div class="impactAnimationP2 hidden"></div>
+              <div class='codemonImageP1 front'></div>
+          </div>
         <div class='hpChart hpChartP1'>
+          <span class='codemonNameP1'></span>
           <div class="p1barChart">
             <label>HP</label><div class="p1bar"></div>
           </div>
@@ -106,12 +117,15 @@
       </div>
       <div class="bottomHalf">
         <div class='hpChart'>
-          <p>CODEMON NAME</P>
+          <span class='codemonNameP2'></span>
           <div class="p2barChart">
             <label>HP</label><div class="p2bar"></div>
           </div>
         </div>
-        <div class='codemonImageP2 back'></div>
+          <div class="codemonimagewrapper">
+            <div class="impactAnimationP1 hidden"></div>
+            <div class='codemonImageP2 back'></div>
+          </div>
         <div class='player2Options'>
           <button type="button" name="attack1">Attack 1</button>
           <button type="button" name="attack2">Attack 2</button>
@@ -121,7 +135,6 @@
     </div>
       </div>
 
-    </div>
     </div>
       <div class="messageBox"></div>
 

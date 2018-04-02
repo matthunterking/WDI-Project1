@@ -54,13 +54,11 @@ section {
   }
 
 .front{
-    width: 46%;
     height: 170px;
     background-size: contain;
   }
 
 .back {
-    width: 50%;
     height: 200px;
     background-size: contain;
   }
@@ -113,4 +111,28 @@ section {
   transition-property: width;
   transition-duration: 1s;
 
+}
+
+.impactAnimationP1 {
+  background-image: url(./images/pow.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  margin: 30px 50px;
+  width: 100px;
+  height: 100px;
+}
+
+.impactAnimationP2 {
+  background-image: url(./images/pow.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  margin: 30px 50px;
+  width: 100px;
+  height: 100px;
+}
+
+.codemonimagewrapper {
+  width: 46%;
 }
