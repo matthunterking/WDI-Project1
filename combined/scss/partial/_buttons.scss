@@ -16,9 +16,9 @@ button {
 
 #computerPlayer {
   background-color: $orange;
-  width: 200px;
+  width: 250px;
   position: relative;
-  bottom: 20px;
+  bottom: 25px;
 }
 
 button[name="start"] {
@@ -54,4 +54,11 @@ button[name="attack4"] {
   background-color: $blue;
   width: 40%;
   margin: 5px 5%;
+}
+
+button[name="playAgain"] {
+  background-color: white;
+  position: absolute;
+  top: 60%;
+  left: 46%;
 }

@@ -1,8 +1,6 @@
 $(function(){
 
 //VARIABLES
-  let player1; //Player 1 name
-  let player2; //Player 1 name
   let computerPlayer = false; //Toggle if player 2 is the computer
   let compIndex; //Used to store the random number of the move the computer chooses
   let hit = true; //Stores if the attack hits or not
@@ -30,7 +28,7 @@ $(function(){
 
   //SET UP CODEMON AND MOVES
   class Move {
-    constructor(name, attackEffect, defenceEffect, basePower, range, description, animation) {
+    constructor(name, attackEffect, defenceEffect, basePower, range, description, animation, sound) {
       this.name = name;
       this.attackEffect = attackEffect;
       this.defenceEffect = defenceEffect;
@@ -38,52 +36,63 @@ $(function(){
       this.basePower = basePower;
       this.description = description;
       this.animation = animation;
+      this.sound = sound;
     }
   }
 
-  const move1 = new Move('Code Smash',0,0,20,5, 'A powerful code attack', 'pow.png');
-  const move2 = new Move('Delete the semicolon',0,2,0,0,'Decrases the defence of your opponant', 'download.png');
-  const move3 = new Move('Install jQuery',2,0,0,0,'Increases your attack','upload.png');
-  const move4 = new Move('All the brackets',0,0,10,15,'Throws <{]{][>]}} at your opponant', 'brackets.png');
-  const move5 = new Move('Rainbow Puke',0,0,15,10,'A barrage of additional colors for no reason', 'rainbow.png');
-  const move6 = new Move('Return undefined',0,0,25,0,'Returns undefined to your opponant', 'undefined.png');
-  const move7 = new Move('404 Not Found',0,0,20,5,'Throws a none completed site at your opponant', '404.png');
+  const move1 = new Move('Code Smash',0,0,20,5, 'A powerful code attack with a small attack range', 'pow.png', './sounds/smash.wav');
+  const move2 = new Move('Delete the semicolon',0,2,0,0,'Decrases the defence of your opponant', 'download.png', './sounds/semi.wav');
+  const move3 = new Move('Install jQuery',2,0,0,0,'Increases your attack','upload.png', './sounds/install.wav');
+  const move4 = new Move('All the brackets',0,0,10,15,'Throws <{]{][>]}} at your opponant. Has a high attack range', 'brackets.png', './sounds/brackets.wav');
+  const move5 = new Move('Rainbow Puke',0,0,15,10,'A barrage of additional colors for no reason. Has a meduim attack range', 'rainbow.png', './sounds/rainbow.wav');
+  const move6 = new Move('Return undefined',0,0,25,0,'Returns undefined to your opponant', 'undefined.png', './sounds/undefined.wav');
+  const move7 = new Move('404 Not Found',0,0,20,7,'Throws a none completed site at your opponant. Has a meduim attack range', '404.png', './sounds/404.wav');
 
   class Codemon {
-    constructor(name, attack, defence, hp, m1, m2, m3, m4, frontImage, backImage) {
+    constructor(name, attack, defence, m1, m2, m3, m4, frontImage, backImage, sound) {
       this.name = name;
       this.attack = attack;
       this.defence = defence;
-      this.hp = hp;
       this.m1 = m1;
       this.m2 = m2;
       this.m3 = m3;
       this.m4 = m4;
       this.frontImage = frontImage;
       this.backImage = backImage;
-
+      this.sound = sound;
     }
   }
 
-  const yavaScript = new Codemon('YavaScript', 6, 4, 100, move4, move6, move3, move2, 'YavaScript-front.png', 'YavaScript-back.png');
-  const htmMel = new Codemon('HTM-Mel', 2, 8, 100, move7, move3, move2, move1, 'HTMel-front.png', 'HTMel-back.png');
-  const cssMess = new Codemon('CS-Mess', 8, 2, 100, move5, move2, move3, move4, 'CSS-front.png', 'CSS-back.png');
+  const yavaScript = new Codemon('YavaScript', 6, 4, move4, move6, move3, move2, 'YavaScript-front.png', 'YavaScript-back.png', './sounds/yava.wav');
+  const htmMel = new Codemon('HTM-Mel', 2, 8, move7, move3, move2, move1, 'HTMel-front.png', 'HTMel-back.png', './sounds/htmel.wav');
+  const cssMess = new Codemon('CS-Mess', 8, 2, move5, move2, move3, move4, 'CSS-front.png', 'CSS-back.png', './sounds/csmess.wav');
 
-  let p1HP = 100;
-  let p2HP = 100;
+  class player {
+    constructor(name, attack, defence, hp, chosen) {
+      this.name = name;
+      this.attack = attack;
+      this.defence = defence;
+      this.hp = hp;
+      this.chosen = chosen;
+    }
+  }
+
+  const p1 = new player('',0,0,100);
+  const p2 = new player('',0,0,100);
 
   //START PAGE
   $('#startGame').on('click', function(){
-    player1 = $('.player1Name').val();
-    player2 = $('.player2Name').val();
-    if (player1 && player2) {
+    p1.name = $('.player1Name').val();
+    p2.name = $('.player2Name').val();
+    if (p1.name && p2.name) {
       $('.startPage').addClass('hidden');
       $('.characterselection').removeClass('hidden');
+      // $('audio').attr('src', './sounds/selectionScreen.mp3');
     } else {
       alert('Please enter a name for both player 1 and player 2');
     }
-    $('.player1Name').text(player1);
-    $('.player2Name').text(player2);
+    $('.player1Name').text(p1.name);
+    $('.player2Name').text(p2.name);
     if(computerPlayer) {
       $('.computer').addClass('inactive');
       $('button#P2').addClass('hidden');
@@ -104,8 +113,8 @@ $(function(){
   //CHARACTER SELECTION SCREEN
   const codemon = [yavaScript, htmMel, cssMess];
   let index = 1;
-  let player1chosen = codemon[1];
-  let player2chosen = codemon[1];
+  p1.chosen = codemon[1];
+  p2.chosen = codemon[1];
 
   const choose = function(index, player) {
     const current = codemon[index];
@@ -153,35 +162,73 @@ $(function(){
 
   const currentCodemon = function(index) {
     if(event.target.id === 'P1') {
-      player1chosen = codemon[index];
+      p1.chosen = codemon[index];
     } else {
-      player2chosen = codemon[index];
+      p2.chosen = codemon[index];
     }
   };
 
   $('button[name="start"]').on('click', function(){
     $('.characterselection').addClass('hidden');
-    $('.battle').removeClass('hidden');
+    $('.battleIntro').removeClass('hidden');
+    $('audio').attr('src', './sounds/battleScreen.mp3');
     if(computerPlayer){
       const randomindex = Math.floor(Math.random()*codemon.length);
-      player2chosen = codemon[randomindex];
+      p2.chosen = codemon[randomindex];
     }
-    $('.codemonImageP1.front').css('background', `url(./css/images/${player1chosen.frontImage})`);
-    $('.codemonImageP1.back').css('background', `url(./css/images/${player1chosen.backImage})`);
-    $('.codemonImageP2.front').css('background', `url(./css/images/${player2chosen.frontImage})`);
-    $('.codemonImageP2.back').css('background', `url(./css/images/${player2chosen.backImage})`);
+    $('.codemonNameP2').text(p2.chosen.name);
+    $('.codemonImageP1.front').css('background', `url(./css/images/${p1.chosen.frontImage})`);
+    $('.codemonImageP1.back').css('background', `url(./css/images/${p1.chosen.backImage})`);
+    $('.codemonImageP2.front').css('background', `url(./css/images/${p2.chosen.frontImage})`);
+    $('.codemonImageP2.back').css('background', `url(./css/images/${p2.chosen.backImage})`);
     $('.codemonImageP1').css('background-size', 'contain');
     $('.codemonImageP1').css('background-position', 'center');
     $('.codemonImageP1').css('background-repeat', 'no-repeat');
     $('.codemonImageP2').css('background-size', 'contain');
     $('.codemonImageP2').css('background-position', 'center');
     $('.codemonImageP2').css('background-repeat', 'no-repeat');
-    const movesP1 = [player1chosen.m1, player1chosen.m2, player1chosen.m3, player1chosen.m4];
+    const movesP1 = [p1.chosen.m1, p1.chosen.m2, p1.chosen.m3, p1.chosen.m4];
     const buttonsP1 = [$attButtP1A1, $attButtP1A2, $attButtP1A3, $attButtP1A4];
-    const movesP2 = [player2chosen.m1, player2chosen.m2, player2chosen.m3, player2chosen.m4];
+    const movesP2 = [p2.chosen.m1, p2.chosen.m2, p2.chosen.m3, p2.chosen.m4];
     const buttonsP2 = [$attButtP2A1, $attButtP2A2, $attButtP2A3, $attButtP2A4];
     buttonsetup(movesP1, buttonsP1, movesP2, buttonsP2);
+    p1.attack = p1.chosen.attack;
+    p1.defence = p1.chosen.defence;
+    p2.attack = p2.chosen.attack;
+    p2.defence = p2.chosen.defence;
+    battlestartAnimation();
   });
+
+  const battlestartAnimation = function() {
+    setTimeout(function(){
+      $('.battleIntro').addClass('hidden');
+      $('.battle').removeClass('hidden');
+    }, 4500);
+    setTimeout(function(){
+      $('.codemonImageP1.front').fadeIn();
+      $('.codemonImageP1.back').fadeIn();
+      $('.mainAudio').prop('volume', 0.5);
+      $messageDisplay.text(`${p1.name} sent out ${p1.chosen.name}`);
+      $('.additionalSound').attr('src', `${p1.chosen.sound}`);
+      $('.additionalSound').prop('autoplay', true);
+
+    }, 6560);
+    setTimeout(function(){
+      $('.mainAudio').prop('volume', 1);
+    }, 9560);
+    setTimeout(function(){
+      $('.codemonImageP2.front').fadeIn();
+      $('.codemonImageP2.back').fadeIn();
+      $('.mainAudio').prop('volume', 0.5);
+      $messageDisplay.text(`${p2.name} sent out ${p2.chosen.name}`);
+      $('.additionalSound').attr('src', `${p2.chosen.sound}`);
+      $('.additionalSound').prop('autoplay', true);
+    }, 10560);
+    setTimeout(function(){
+      $('.mainAudio').prop('volume', 1);
+    }, 13560);
+  };
+
   //BATTLE SCREEN
   const buttonsetup = function (movesP1, buttonsP1, movesP2, buttonsP2) {
     for (let i = 0; i < 4; i++) {
@@ -191,7 +238,7 @@ $(function(){
       });
       buttonsP1[i].on('click', function(){
         if(playerturn === 1){
-          attack(movesP1[i], player1chosen, player2chosen, 1);
+          attack(movesP1[i], p1, p2, 1);
         }
       });
       buttonsP2[i].text((movesP2[i]).name);
@@ -200,25 +247,18 @@ $(function(){
       });
       buttonsP2[i].on('click', function(){
         if(playerturn === 2){
-          attack((movesP2[i]), player2chosen, player1chosen, 2);
+          attack((movesP2[i]), p2, p1, 2);
         }
       });
     }
   };
-
-  //random computer move
-  // const randomMove = function() {
-  //   compIndex = Math.floor(Math.random()*4);
-  //   let moveNumbers = [move1, move2, move3, move4];
-  //   setTimeout($player2display.toggleClass('inactive'), 40000);
-  //   setTimeout(attack(moveNumbers[compIndex], player2chosen, player1chosen), 40000);
-  // };
 
   const changeTurns = function() {
     if (playerturn === 1) {
       playerturn = 2;
       $player1display.toggleClass('inactive');
       $player2display.toggleClass('inactive');
+      computerPlayer ? computerAttack() : '';
     } else {
       playerturn = 1;
       $player2display.toggleClass('inactive');
@@ -227,42 +267,58 @@ $(function(){
     hit = true;
   };
 
-  const attack = function(move, attcodemon, defCodemon, playerID) {
+  const attack = function(move, attackingPlayer, defendingPlayer, playerID) {
+    console.log(move);
     miss();
+    statsUpdate(move, attackingPlayer, defendingPlayer, playerID);
     if (hit) {
-      const result = attackHPEffect(move.basePower, attcodemon.attack, defCodemon.defence, move.range);
+      const result = attackHPEffect(move.basePower, attackingPlayer.attack, defendingPlayer.defence, move.range);
       if(playerID === 1){
-        p2HP -= result;
+        p2.hp -= result;
       } else {
-        p1HP -= result;
+        p1.hp -= result;
       }
     }
-    animation(move, attcodemon, defCodemon, playerID);
+    console.log(move);
+    animation(move, attackingPlayer.chosen, defendingPlayer.chosen, playerID);
     setTimeout(changeTurns, (delayTimer*3));
     checkwinner();
+    console.log(`The other players hp is ${defendingPlayer.hp} at the end of the go`);
   };
 
   const miss = function() {
-    if (Math.floor(Math.random()*100) < 22) {
+    if (Math.floor(Math.random()*100) < 15) {
       hit = false;
     }
   };
 
   const attackHPEffect = function(basePower, attack, defence, range) {
-    result = basePower + (Math.abs(attack-defence)) + (Math.floor(Math.random()*range)+1);
-    return result;
+    if (basePower === 0) {
+      result = 0;
+      return result;
+    } else {
+      let defencefactor = (attack-defence);
+      let calRange = (Math.floor(Math.random()*range)+1);
+      result = basePower + defencefactor + calRange;
+      console.log(`the base power is ${basePower} the attacking player had ${attack} attack. The defending player had ${defence} defence. The move has a range of ${range}`);
+      console.log(`${basePower} + ${defencefactor} + ${calRange} = ${result}`);
+      return result;
+    }
   };
 
-  const statsUpdate = function(move, attcodemon, defCodemon, playerID) {
+  const statsUpdate = function(move, attackingPlayer, defendingPlayer, playerID) {
     if (move.attackEffect > 0) {
-      attcodemon.attack += (Math.floor(Math.random()*move.attackEffect));
+      attackingPlayer.attack += (Math.floor(Math.random()*3)+1)*move.attackEffect;
+      hit = true;
       if(playerID === 1){
         playerID = 2;
       } else {
         playerID = 1;
       }
       setTimeout(function(){
-        $messageDisplay.text(`${attcodemon.name}'s attack incresed!`);
+        $('.mainAudio').prop('volume', 0.5);
+        $('.additionalSound').attr('src', `${move.sound}`);
+        $messageDisplay.text(`${attackingPlayer.chosen.name}'s attack incresed!`);
         $(`.impactAnimationP${playerID.toString()}`).removeClass('hidden');
         $(`.impactAnimationP${playerID.toString()}`).css('background-image', `url(./css/images/${move.animation}`);
       }, delayTimer);
@@ -270,9 +326,12 @@ $(function(){
         $(`.impactAnimationP${playerID.toString()}`).addClass('hidden');
       }, (delayTimer * 1.5));
     } else if (move.defenceEffect > 0) {
-      defCodemon.defence -= (Math.floor(Math.random()*move.defenceEffect));
+      defendingPlayer.defence -= (Math.floor(Math.random()*3)+1)*move.defenceEffect;
+      hit = true;
       setTimeout(function(){
-        $messageDisplay.text(`${defCodemon.name}'s defence was lowered!`);
+        $('.mainAudio').prop('volume', 0.5);
+        $('.additionalSound').attr('src', `${move.sound}`);
+        $messageDisplay.text(`${defendingPlayer.chosen.name}'s defence was lowered!`);
         $(`.impactAnimationP${playerID.toString()}`).removeClass('hidden');
         $(`.impactAnimationP${playerID.toString()}`).css('background-image', `url(./css/images/${move.animation}`);
       }, delayTimer);
@@ -283,16 +342,17 @@ $(function(){
   };
 
   const animation = function(move, attcodemon, defCodemon, playerID) {
+    console.log(attcodemon);
     $messageDisplay.text(`${attcodemon.name} used ${move.name}!`);
     if(hit === false) {
       setTimeout(function(){
         $messageDisplay.text(`${attcodemon.name}'s attack missed!!`);
       }, delayTimer);
-    } else if (move.attackEffect > 0 || move.defenceEffect > 0) {
-      statsUpdate(move, attcodemon, defCodemon, playerID);
     } else if (move.basePower > 0) {
       setTimeout(function(){
         $(`.impactAnimationP${playerID.toString()}`).removeClass('hidden');
+        $('.mainAudio').prop('volume', 0.5);
+        $('.additionalSound').attr('src', `${move.sound}`);
         $(`.impactAnimationP${playerID.toString()}`).css('background-image', `url(./css/images/${move.animation}`);
       }, (delayTimer * 1.1));
       setTimeout(function(){
@@ -306,57 +366,72 @@ $(function(){
 
   const displayDamage = function(playerID) {
     if(playerID === 1) {
-      updatebars(p2HP, 2);
+      updatebars(p2.hp, $p2bar);
     } else {
-      updatebars(p1HP, 1);
+      updatebars(p1.hp, $p1bar);
     }
   };
 
   const updatebars = function(hp, player) {
-    if (player === 1) {
-      $p1bar.css('width', `${hp}%`);
-      if (hp < 50 && hp > 10) {
-        $p1bar.css('background', 'yellow');
-      } else if (hp < 10) {
-        $p1bar.css('background', 'red');
-      }
-    } else {
-      $p2bar.css('width', `${hp}%`);
-      if (hp < 50 && hp > 10) {
-        $p2bar.css('background', 'yellow');
-      } else if (hp < 10) {
-        $p2bar.css('background', 'red');
-      }
+    console.log(hp);
+    player.css('width', `${hp}%`);
+    if (hp < 50 && hp > 10) {
+      player.css('background', 'yellow');
+    } else if (hp < 10) {
+      player.css('background', 'red');
     }
   };
 
   const checkwinner = function() {
-    if (p2HP < 0) {
-      p2HP = 0;
+    if (p2.hp <= 0) {
+      p2.hp = 0;
       playerturn = 0;
       setTimeout(function(){
         $('.codemonImageP2').fadeOut();
-        $messageDisplay.text(`${player2}'s '${player1chosen.name} has fainted!`);
+        $messageDisplay.text(`${p2.name}'s ${p2.chosen.name} has fainted!`);
       }, (delayTimer * 4));
       setTimeout(function(){
-        $messageDisplay.text(`${player1} wins!`);
+        $('.battle').addClass('hidden');
+        $('.winner').removeClass('hidden');
+        $('.winnerName').text(`${p1.name}`);
+        $('.mainAudio').attr('src', './sounds/endgame.mp3');
         playerturn = 0;
-        $player2display.addClass('inactive');
       }, (delayTimer * 5));
-    } else if(p1HP < 0) {
-      p1HP.hp = 0;
+    } else if(p1.hp <= 0) {
+      p1.hp = 0;
       setTimeout(function(){
         $('.codemonImageP1').fadeOut();
-        $messageDisplay.text(`${player2chosen.name} has fainted!`);
+        $messageDisplay.text(`${p1.name}'s ${p1.chosen.name} has fainted!`);
       }, (delayTimer * 4));
       setTimeout(function(){
-        $messageDisplay.text(`${player2} wins!`);
+        $('.battle').addClass('hidden');
+        $('.winner').removeClass('hidden');
+        $('.winnerName').text(`${p1.name}`);
+        $('.mainAudio').attr('src', './sounds/endgame.mp3');
         playerturn = 0;
-        $player1display.addClass('inactive');
       }, (delayTimer * 5));
     } else {
       return;
     }
+  };
+
+  $('.winner button[name="playAgain"]').on('click', function(){
+    $('.winner').addClass('hidden');
+    $('.startPage').removeClass('hidden');
+    $('.mainAudio').attr('src', './sounds/startPage.mp3');
+    p1.name = '';
+    p2.name = '';
+    $('.player1Name').val('');
+    $('.player2Name').val('');
+  });
+
+  const computerAttack = function() {
+    setTimeout(function() {
+      const movesP2 = [p2.chosen.m1, p2.chosen.m2, p2.chosen.m3, p2.chosen.m4];
+      const move = movesP2[Math.floor(Math.random()*3)];
+      console.log(p2.chosen);
+      attack(move, p2, p1, 2);
+    }, delayTimer);
   };
 
 });
