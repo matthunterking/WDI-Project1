@@ -91,7 +91,7 @@ section.battle {
   animation: spin;
   animation-duration: 1s;
   animation-iteration-count: 5;
-  transition-timing-function: step-start; }
+  transition-timing-function: ease-in; }
 
 @keyframes spin {
   0% {
@@ -336,6 +336,9 @@ button[name="playAgain"] {
   position: absolute;
   top: 60%;
   left: 46%; }
+
+button.inactiveButtons {
+  background-color: white; }
 
 h1 {
   display: none; }

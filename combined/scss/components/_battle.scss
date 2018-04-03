@@ -30,7 +30,7 @@ section {
   animation: spin;
   animation-duration: 1s;
   animation-iteration-count: 5;
-  transition-timing-function: step-start;
+  transition-timing-function: ease-in;
 }
 
 @keyframes spin {

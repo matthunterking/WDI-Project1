@@ -94,8 +94,10 @@ $(function(){
     $('.player1Name').text(p1.name);
     $('.player2Name').text(p2.name);
     if(computerPlayer) {
-      $('.computer').addClass('inactive');
-      $('button#P2').addClass('hidden');
+      $('.computer').addClass('hidden');
+      $('.codemonSelection').css('width', '100%');
+      $('button.p2').addClass('hidden');
+      $('button[name="start"]').css('top', '763px');
     }
   });
 
@@ -136,13 +138,13 @@ $(function(){
 
   $('button[name="next"]').on('click', function(){
     if(index < codemon.length) {
-      choose(index, event.target.id);
+      choose(index, event.target.className);
       currentCodemon(index);
       index+=1;
     } else {
       index = 0;
       currentCodemon(index);
-      choose(index, event.target.id);
+      choose(index, event.target.className);
       index +=1;
     }
   });
@@ -150,12 +152,12 @@ $(function(){
   $('button[name="previous"]').on('click', function(){
     if(index < codemon.length) {
       index-=1;
-      choose(index, event.target.id);
+      choose(index, event.target.className);
       currentCodemon(index);
       index = codemon.length;
     } else {
       index -=1;
-      choose(index, event.target.id);
+      choose(index, event.target.className);
       currentCodemon(index);
     }
   });
@@ -175,6 +177,17 @@ $(function(){
     if(computerPlayer){
       const randomindex = Math.floor(Math.random()*codemon.length);
       p2.chosen = codemon[randomindex];
+      $('#player2Screen').addClass('hidden');
+      $('#player1Screen').css('width', '100%');
+      $('#player1Screen').css('background-size', '122%');
+      $('.codemonImageP1').css('height', '290px');
+      $('.player1Options').css('position', 'absolute');
+      $('.player1Options').css('bottom', '20%');
+      $('.impactAnimationP1').css('margin', '40px 155px');
+      $('.impactAnimationP2').css('margin', '40px 155px');
+      $('.impactAnimationP2').css('width', '160px');
+      $('.bottomHalf').css('padding', '50px');
+
     }
     $('.codemonNameP2').text(p2.chosen.name);
     $('.codemonImageP1.front').css('background', `url(./css/images/${p1.chosen.frontImage})`);
@@ -258,17 +271,24 @@ $(function(){
       playerturn = 2;
       $player1display.toggleClass('inactive');
       $player2display.toggleClass('inactive');
-      computerPlayer ? computerAttack() : '';
+      if(computerPlayer) {
+        computerAttack();
+        $player1display.toggleClass('inactive');
+        $('button').toggleClass('inactiveButtons');
+      }
     } else {
       playerturn = 1;
       $player2display.toggleClass('inactive');
       $player1display.toggleClass('inactive');
+      if(computerPlayer) {
+        $player1display.toggleClass('inactive');
+        $('button').toggleClass('inactiveButtons');
+      }
     }
     hit = true;
   };
 
   const attack = function(move, attackingPlayer, defendingPlayer, playerID) {
-    console.log(move);
     miss();
     statsUpdate(move, attackingPlayer, defendingPlayer, playerID);
     if (hit) {
@@ -279,11 +299,9 @@ $(function(){
         p1.hp -= result;
       }
     }
-    console.log(move);
     animation(move, attackingPlayer.chosen, defendingPlayer.chosen, playerID);
     setTimeout(changeTurns, (delayTimer*3));
     checkwinner();
-    console.log(`The other players hp is ${defendingPlayer.hp} at the end of the go`);
   };
 
   const miss = function() {
@@ -300,8 +318,6 @@ $(function(){
       let defencefactor = (attack-defence);
       let calRange = (Math.floor(Math.random()*range)+1);
       result = basePower + defencefactor + calRange;
-      console.log(`the base power is ${basePower} the attacking player had ${attack} attack. The defending player had ${defence} defence. The move has a range of ${range}`);
-      console.log(`${basePower} + ${defencefactor} + ${calRange} = ${result}`);
       return result;
     }
   };
@@ -342,7 +358,6 @@ $(function(){
   };
 
   const animation = function(move, attcodemon, defCodemon, playerID) {
-    console.log(attcodemon);
     $messageDisplay.text(`${attcodemon.name} used ${move.name}!`);
     if(hit === false) {
       setTimeout(function(){
@@ -373,7 +388,6 @@ $(function(){
   };
 
   const updatebars = function(hp, player) {
-    console.log(hp);
     player.css('width', `${hp}%`);
     if (hp < 50 && hp > 10) {
       player.css('background', 'yellow');
@@ -420,16 +434,24 @@ $(function(){
     $('.startPage').removeClass('hidden');
     $('.mainAudio').attr('src', './sounds/startPage.mp3');
     p1.name = '';
+    p1.attack = 0;
+    p1.defence = 0;
+    p1.hp = 100;
     p2.name = '';
+    p2.attack = 0;
+    p2.defence = 0;
+    p2.hp = 100;
+    $('.codemonImageP1').css('display', 'inherit');
+    $('.codemonImageP2').css('display', 'inherit');
     $('.player1Name').val('');
     $('.player2Name').val('');
+    computerPlayer = false;
   });
 
   const computerAttack = function() {
     setTimeout(function() {
       const movesP2 = [p2.chosen.m1, p2.chosen.m2, p2.chosen.m3, p2.chosen.m4];
       const move = movesP2[Math.floor(Math.random()*3)];
-      console.log(p2.chosen);
       attack(move, p2, p1, 2);
     }, delayTimer);
   };
