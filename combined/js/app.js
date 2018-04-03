@@ -4,7 +4,7 @@ $(function(){
   let computerPlayer = false; //Toggle if player 2 is the computer
   let compIndex; //Used to store the random number of the move the computer chooses
   let hit = true; //Stores if the attack hits or not
-  const delayTimer = 2000; //Base time delay of animation and messages
+  let delayTimer = 2000; //Base time delay of animation and messages
   let result; //stores the result of the battle
   let playerturn = 1; //stores the current players turn. Initialized to 1
 
@@ -163,7 +163,7 @@ $(function(){
   });
 
   const currentCodemon = function(index) {
-    if(event.target.id === 'P1') {
+    if(event.target.className === 'P1') {
       p1.chosen = codemon[index];
     } else {
       p2.chosen = codemon[index];
@@ -187,7 +187,6 @@ $(function(){
       $('.impactAnimationP2').css('margin', '40px 155px');
       $('.impactAnimationP2').css('width', '160px');
       $('.bottomHalf').css('padding', '50px');
-
     }
     $('.codemonNameP2').text(p2.chosen.name);
     $('.codemonImageP1.front').css('background', `url(./css/images/${p1.chosen.frontImage})`);
@@ -216,7 +215,7 @@ $(function(){
     setTimeout(function(){
       $('.battleIntro').addClass('hidden');
       $('.battle').removeClass('hidden');
-    }, 4500);
+    }, (delayTimer + 1500));
     setTimeout(function(){
       $('.codemonImageP1.front').fadeIn();
       $('.codemonImageP1.back').fadeIn();
@@ -224,11 +223,10 @@ $(function(){
       $messageDisplay.text(`${p1.name} sent out ${p1.chosen.name}`);
       $('.additionalSound').attr('src', `${p1.chosen.sound}`);
       $('.additionalSound').prop('autoplay', true);
-
-    }, 6560);
+    }, (delayTimer + 4560));
     setTimeout(function(){
       $('.mainAudio').prop('volume', 1);
-    }, 9560);
+    }, (delayTimer + 7560));
     setTimeout(function(){
       $('.codemonImageP2.front').fadeIn();
       $('.codemonImageP2.back').fadeIn();
@@ -446,6 +444,14 @@ $(function(){
     $('.player1Name').val('');
     $('.player2Name').val('');
     computerPlayer = false;
+    $('.codemonNameP2').text('');
+    $('.codemonImageP1.front').css('background', '');
+    $('.codemonImageP1.back').css('background', '');
+    $('.codemonImageP2.front').css('background', '');
+    $('.codemonImageP2.back').css('background', '');
+    $messageDisplay.text('');
+    clearTimeout(delayTimer);
+    delayTimer = 2000;
   });
 
   const computerAttack = function() {
