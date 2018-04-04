@@ -255,7 +255,8 @@ $(function(){
   };
 
   const disableButtons = function() {
-    $('button').off('click');
+    $('.player1Options button, .player2Options button').off('click');
+    console.log('disabled buttons');
   };
 
   //------------------------ BATTLE INTRO SECTION -------------------------------
@@ -305,24 +306,30 @@ $(function(){
       $player1display.toggleClass('inactive');
       $player2display.toggleClass('inactive');
       buttonsetup(movesP2, buttonsP2, p2, p1, 2);
+      $('.player1Options button').addClass('inactiveButtons');
+      $('.player2Options button').removeClass('inactiveButtons');
       if(computerPlayer) {
         computerAttack();
         $player1display.toggleClass('inactive');
+        $('.player1Options button').addClass('inactiveButtons');
       }
     } else {
       playerturn = 1;
       $player2display.toggleClass('inactive');
       $player1display.toggleClass('inactive');
       buttonsetup(movesP1, buttonsP1, p1, p2, 1);
+      $('.player2Options button').addClass('inactiveButtons');
+      $('.player1Options button').removeClass('inactiveButtons');
       if(computerPlayer) {
         $player1display.toggleClass('inactive');
+        $('.player1Options button').removeClass('inactiveButtons');
       }
     }
     hit = true;
   };
 
   const attack = function(move, attackingPlayer, defendingPlayer, playerID) {
-    $(`.player${playerID.toString()}options button`).addClass('inactiveButtons');
+    console.log(playerturn);
     disableButtons();
     hitOrMiss();
     statsUpdate(move, attackingPlayer, defendingPlayer, playerID);
@@ -330,7 +337,6 @@ $(function(){
     move.basePower > 0 ? animation(move, attackingPlayer.chosen, defendingPlayer.chosen, playerID) : '';
     t6 = setTimeout(changeTurns, (delayTimer*3));
     checkwinner(attackingPlayer, defendingPlayer, playerID);
-    console.log(`end attack player turn is now ${playerturn}`);
   };
 
   const hitOrMiss = function() {
@@ -373,6 +379,7 @@ $(function(){
     if (move.attackEffect > 0) {
       attackIncrease(move, attackingPlayer);
       playerID === 1 ? playerID = 2 : playerID = 1; //switches the player ID so that the animation appears on the attacking codemon
+      $messageDisplay.text(`${attackingPlayer.chosen.name} used ${move.name}!`);
       t7 = setTimeout(function(){
         playMoveSound(move);
         attackIncreaseMessage(attackingPlayer);
@@ -383,6 +390,7 @@ $(function(){
       }, (delayTimer * 1.5));
     } else if (move.defenceEffect > 0) {
       defenceDecrease(move, defendingPlayer);
+      $messageDisplay.text(`${attackingPlayer.chosen.name} used ${move.name}!`);
       t9 = setTimeout(function(){
         playMoveSound(move);
         defenceDecreaseMessage(defendingPlayer);
@@ -427,16 +435,18 @@ $(function(){
 
   const animation = function(move, attcodemon, defCodemon, playerID) {
     attackMessageBox(move, attcodemon);
-    t12 = setTimeout(function(){
-      startMoveAnimation(move, playerID);
-      playMoveSound(move);
-    }, (delayTimer * 1.1));
-    t13 = setTimeout(function(){
-      endMoveAnimation(playerID);
-    }, (delayTimer * 1.9));
-    t14 = setTimeout(function() {
-      displayDamage(playerID);
-    }, (delayTimer * 2));
+    if(hit) {
+      t12 = setTimeout(function(){
+        startMoveAnimation(move, playerID);
+        playMoveSound(move);
+      }, (delayTimer * 1.1));
+      t13 = setTimeout(function(){
+        endMoveAnimation(playerID);
+      }, (delayTimer * 1.9));
+      t14 = setTimeout(function() {
+        displayDamage(playerID);
+      }, (delayTimer * 2));
+    }
   };
 
   const displayDamage = function(playerID) {
