@@ -89,17 +89,15 @@ section.battle {
   left: 25%;
   top: 30%;
   animation: spin;
-  animation-duration: 1s;
+  animation-duration: 5s;
   animation-iteration-count: 5;
   transition-timing-function: ease-in; }
 
 @keyframes spin {
   0% {
     transform: rotate(0deg); }
-  50% {
-    transform: rotate(360deg); }
   100% {
-    transform: rotate(359deg); } }
+    transform: rotate(1800deg); } }
 .playerScreen {
   width: 50%;
   height: 550px;
@@ -169,7 +167,7 @@ section.battle {
   height: 15px;
   background-color: green;
   transition-property: width;
-  transition-duration: 1s; }
+  transition-duration: 2s; }
 
 .p2barChart {
   width: 90%;
@@ -183,7 +181,7 @@ section.battle {
   height: 15px;
   background-color: green;
   transition-property: width;
-  transition-duration: 1s; }
+  transition-duration: 2s; }
 
 .impactAnimationP1 {
   background-image: url(./images/pow.png);
