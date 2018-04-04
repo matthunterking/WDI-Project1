@@ -1,15 +1,31 @@
 $(function(){
 
-//VARIABLES
+//----------------------------- VARIABLES --------------------------------------
   let computerPlayer = false; //Toggle if player 2 is the computer
-  let compIndex; //Used to store the random number of the move the computer chooses
   let hit = true; //Stores if the attack hits or not
-  let delayTimer = 2000; //Base time delay of animation and messages
+  const delayTimer = 2000; //Base time delay of animation and messages
   let result; //stores the result of the battle
   let playerturn = 1; //stores the current players turn. Initialized to 1
+  let t1; //t(number) varaibles store all the setTimeout functions for the site
+  let t2; // they are used to clearTimeout after the game has finished
+  let t3;
+  let t4;
+  let t5;
+  let t6;
+  let t7;
+  let t8;
+  let t9;
+  let t10;
+  let t11;
+  let t12;
+  let t13;
+  let t14;
+  let t15;
+  let t16;
+  let t17;
 
-  //SELECTORS
-  const $attButtP1A1 = $('.player1Options button[name="attack1"]');
+  //-------------------------- SELECTORS ---------------------------------------
+  const $attButtP1A1 = $('.player1Options button[name="attack1"]'); //used for event listeners when game is loaded
   const $attButtP1A2 = $('.player1Options button[name="attack2"]');
   const $attButtP1A3 = $('.player1Options button[name="attack3"]');
   const $attButtP1A4 = $('.player1Options button[name="attack4"]');
@@ -18,15 +34,15 @@ $(function(){
   const $attButtP2A3 = $('.player2Options button[name="attack3"]');
   const $attButtP2A4 = $('.player2Options button[name="attack4"]');
 
-  const $player1display = $('#player1Screen');
+  const $player1display = $('#player1Screen'); //Used to switch screens when changing turns
   const $player2display = $('#player2Screen');
 
-  const $p1bar = $('.p1bar');
+  const $p1bar = $('.p1bar'); //used to select the health bars
   const $p2bar = $('.p2bar');
 
-  const $messageDisplay = $('.messageBox');
+  const $messageDisplay = $('.messageBox'); //used to display messages during the battle
 
-  //SET UP CODEMON AND MOVES
+  //--------------------- SET UP CODEMON AND MOVES -----------------------------
   class Move {
     constructor(name, attackEffect, defenceEffect, basePower, range, description, animation, sound) {
       this.name = name;
@@ -40,7 +56,7 @@ $(function(){
     }
   }
 
-  const move1 = new Move('Code Smash',0,0,20,5, 'A powerful code attack with a small attack range', 'pow.png', './sounds/smash.wav');
+  const move1 = new Move('Code Smash',0,0,500,5, 'A powerful code attack with a small attack range', 'pow.png', './sounds/smash.wav');
   const move2 = new Move('Delete the semicolon',0,2,0,0,'Decrases the defence of your opponant', 'download.png', './sounds/semi.wav');
   const move3 = new Move('Install jQuery',2,0,0,0,'Increases your attack','upload.png', './sounds/install.wav');
   const move4 = new Move('All the brackets',0,0,10,15,'Throws <{]{][>]}} at your opponant. Has a high attack range', 'brackets.png', './sounds/brackets.wav');
@@ -77,28 +93,18 @@ $(function(){
     }
   }
 
-  const p1 = new player('',0,0,100);
+  const p1 = new player('',0,0,100); //sets up a new player.
   const p2 = new player('',0,0,100);
 
-  //START PAGE
+  //------------------------------ START PAGE ----------------------------------
   $('#startGame').on('click', function(){
-    p1.name = $('.player1Name').val();
+    p1.name = $('.player1Name').val(); //takes the value input into the form and adds it to the player objects
     p2.name = $('.player2Name').val();
-    if (p1.name && p2.name) {
-      $('.startPage').addClass('hidden');
-      $('.characterselection').removeClass('hidden');
-      // $('audio').attr('src', './sounds/selectionScreen.mp3');
-    } else {
-      alert('Please enter a name for both player 1 and player 2');
-    }
-    $('.player1Name').text(p1.name);
+    checkFor2Players(p1.name, p2.name); //function to check if 2 player names have been input
+    $('.player1Name').text(p1.name); //populates all future instances of player name with values
     $('.player2Name').text(p2.name);
-    if(computerPlayer) {
-      $('.computer').addClass('hidden');
-      $('.codemonSelection').css('width', '100%');
-      $('button.p2').addClass('hidden');
-      $('button[name="start"]').css('top', '763px');
-    }
+    computerPlayer ? computerPlayerFormatting() : ''; //function to change the formating of the pages to 1 player mode if playing the computer
+    console.log(`Start game player turn is now ${playerturn}`);
   });
 
   $('#computerPlayer').on('click', function(){
@@ -109,16 +115,45 @@ $(function(){
       $('.player2Name').val('Computer');
       computerPlayer = true;
     }
-
   });
 
-  //CHARACTER SELECTION SCREEN
-  const codemon = [yavaScript, htmMel, cssMess];
-  let index = 1;
-  p1.chosen = codemon[1];
-  p2.chosen = codemon[1];
+  const checkFor2Players = function(p1, p2) {
+    if (p1 && p2) {
+      $('.startPage').addClass('hidden');
+      $('.characterselection').removeClass('hidden');
+    } else {
+      alert('Please enter a name for both player 1 and player 2');
+    }
+  };
 
-  const choose = function(index, player) {
+  const computerPlayerFormatting = function() {
+    $('.computer').addClass('hidden');
+    $('.codemonSelection').css('width', '100%');
+    $('button.p2').addClass('hidden');
+    $('button[name="start"]').css('top', '763px');
+    $('#player2Screen').addClass('hidden');
+    $('#player1Screen').css('width', '100%');
+    $('#player1Screen').css('background-size', '122%');
+    $('.codemonImageP1').css('height', '290px');
+    $('.player1Options').css('position', 'absolute');
+    $('.player1Options').css('bottom', '20%');
+    $('.impactAnimationP1').css('margin', '40px 155px');
+    $('.impactAnimationP2').css('margin', '40px 155px');
+    $('.impactAnimationP2').css('width', '160px');
+    $('.bottomHalf').css('padding', '50px');
+  };
+
+  //---------------------- CHARACTER SELECTION SECTION -------------------------
+
+  const currentCodemon = function(index) {
+    if(event.target.className === 'P1') {
+      p1.chosen = codemon[index];
+    } else {
+      p2.chosen = codemon[index];
+    }
+  }; //assigns the current selection to the player object
+
+  const updateSelectionDisplay = function(index, player) { //Updates the display of the selection screen
     const current = codemon[index];
     $(`.codemonName${player}`).text(current.name);
     $(`.codemonAttack${player}`).text(current.attack);
@@ -133,61 +168,62 @@ $(function(){
     $(`.codemonImage${player}`).css('background-repeat', 'no-repeat');
   };
 
-  choose(index, 'P1');
-  choose(index, 'P2');
-
   $('button[name="next"]').on('click', function(){
-    if(index < codemon.length) {
-      choose(index, event.target.className);
+    index+=1;
+    if(index < (codemon.length)) {
+      updateSelectionDisplay(index, event.target.className);
       currentCodemon(index);
-      index+=1;
     } else {
       index = 0;
+      updateSelectionDisplay(index, event.target.className);
       currentCodemon(index);
-      choose(index, event.target.className);
-      index +=1;
     }
-  });
+  }); //next button
 
   $('button[name="previous"]').on('click', function(){
+    index === 0 ? index = (codemon.length-1) : index-=1;
     if(index < codemon.length) {
-      index-=1;
-      choose(index, event.target.className);
+      updateSelectionDisplay(index, event.target.className);
       currentCodemon(index);
-      index = codemon.length;
     } else {
-      index -=1;
-      choose(index, event.target.className);
+      index = 0;
+      updateSelectionDisplay(index, event.target.className);
       currentCodemon(index);
     }
-  });
+  }); //previous button
 
-  const currentCodemon = function(index) {
-    if(event.target.className === 'P1') {
-      p1.chosen = codemon[index];
-    } else {
-      p2.chosen = codemon[index];
-    }
-  };
+  const codemon = [htmMel, yavaScript, cssMess]; //an array to store the codemon objects
+  let index = 0; //default index of the array
+  p1.chosen = htmMel; //default codemon for both players
+  p2.chosen = htmMel;
+  updateSelectionDisplay(index, 'P1');
+  updateSelectionDisplay(index, 'P2');
+
+
 
   $('button[name="start"]').on('click', function(){
+    computerPlayer ? computerSetUp() : '';
     $('.characterselection').addClass('hidden');
     $('.battleIntro').removeClass('hidden');
     $('audio').attr('src', './sounds/battleScreen.mp3');
-    if(computerPlayer){
-      const randomindex = Math.floor(Math.random()*codemon.length);
-      p2.chosen = codemon[randomindex];
-      $('#player2Screen').addClass('hidden');
-      $('#player1Screen').css('width', '100%');
-      $('#player1Screen').css('background-size', '122%');
-      $('.codemonImageP1').css('height', '290px');
-      $('.player1Options').css('position', 'absolute');
-      $('.player1Options').css('bottom', '20%');
-      $('.impactAnimationP1').css('margin', '40px 155px');
-      $('.impactAnimationP2').css('margin', '40px 155px');
-      $('.impactAnimationP2').css('width', '160px');
-      $('.bottomHalf').css('padding', '50px');
-    }
+    battleScreenFormatting();
+    const movesP1 = [p1.chosen.m1, p1.chosen.m2, p1.chosen.m3, p1.chosen.m4];
+    const buttonsP1 = [$attButtP1A1, $attButtP1A2, $attButtP1A3, $attButtP1A4];
+    const movesP2 = [p2.chosen.m1, p2.chosen.m2, p2.chosen.m3, p2.chosen.m4];
+    const buttonsP2 = [$attButtP2A1, $attButtP2A2, $attButtP2A3, $attButtP2A4];
+    buttonsetup(movesP1, buttonsP1, p1, p2, 1);
+    buttonsetup(movesP2, buttonsP2, p2, p1, 2);
+    statsAssignment(p1);
+    statsAssignment(p2);
+    battlestartAnimation();
+  });
+
+  const computerSetUp = function() { //chooses a random character for the computer
+    const randomindex = Math.floor(Math.random()*codemon.length);
+    p2.chosen = codemon[randomindex];
+  };
+
+  const battleScreenFormatting = function() { //formats the battle screen
     $('.codemonNameP2').text(p2.chosen.name);
     $('.codemonImageP1.front').css('background', `url(./css/images/${p1.chosen.frontImage})`);
     $('.codemonImageP1.back').css('background', `url(./css/images/${p1.chosen.backImage})`);
@@ -199,112 +235,172 @@ $(function(){
     $('.codemonImageP2').css('background-size', 'contain');
     $('.codemonImageP2').css('background-position', 'center');
     $('.codemonImageP2').css('background-repeat', 'no-repeat');
-    const movesP1 = [p1.chosen.m1, p1.chosen.m2, p1.chosen.m3, p1.chosen.m4];
-    const buttonsP1 = [$attButtP1A1, $attButtP1A2, $attButtP1A3, $attButtP1A4];
-    const movesP2 = [p2.chosen.m1, p2.chosen.m2, p2.chosen.m3, p2.chosen.m4];
-    const buttonsP2 = [$attButtP2A1, $attButtP2A2, $attButtP2A3, $attButtP2A4];
-    buttonsetup(movesP1, buttonsP1, movesP2, buttonsP2);
-    p1.attack = p1.chosen.attack;
-    p1.defence = p1.chosen.defence;
-    p2.attack = p2.chosen.attack;
-    p2.defence = p2.chosen.defence;
-    battlestartAnimation();
-  });
-
-  const battlestartAnimation = function() {
-    setTimeout(function(){
-      $('.battleIntro').addClass('hidden');
-      $('.battle').removeClass('hidden');
-    }, (delayTimer + 1500));
-    setTimeout(function(){
-      $('.codemonImageP1.front').fadeIn();
-      $('.codemonImageP1.back').fadeIn();
-      $('.mainAudio').prop('volume', 0.5);
-      $messageDisplay.text(`${p1.name} sent out ${p1.chosen.name}`);
-      $('.additionalSound').attr('src', `${p1.chosen.sound}`);
-      $('.additionalSound').prop('autoplay', true);
-    }, (delayTimer + 4560));
-    setTimeout(function(){
-      $('.mainAudio').prop('volume', 1);
-    }, (delayTimer + 7560));
-    setTimeout(function(){
-      $('.codemonImageP2.front').fadeIn();
-      $('.codemonImageP2.back').fadeIn();
-      $('.mainAudio').prop('volume', 0.5);
-      $messageDisplay.text(`${p2.name} sent out ${p2.chosen.name}`);
-      $('.additionalSound').attr('src', `${p2.chosen.sound}`);
-      $('.additionalSound').prop('autoplay', true);
-    }, 10560);
-    setTimeout(function(){
-      $('.mainAudio').prop('volume', 1);
-    }, 13560);
   };
 
-  //BATTLE SCREEN
-  const buttonsetup = function (movesP1, buttonsP1, movesP2, buttonsP2) {
+  const statsAssignment = function(player) {
+    player.attack = player.chosen.attack;
+    player.defence = player.chosen.defence;
+  }; //assigns the codemons stats to each player
+
+  const buttonsetup = function (moves, buttons, player, opponant, id) { //sets up the buttons for the battle screen
     for (let i = 0; i < 4; i++) {
-      buttonsP1[i].text((movesP1[i]).name);
-      buttonsP1[i].mouseover(function(){
-        $messageDisplay.text(movesP1[i].description);
+      buttons[i].text((moves[i]).name);
+      buttons[i].mouseover(function(){
+        $messageDisplay.text(moves[i].description);
       });
-      buttonsP1[i].on('click', function(){
-        if(playerturn === 1){
-          attack(movesP1[i], p1, p2, 1);
-        }
-      });
-      buttonsP2[i].text((movesP2[i]).name);
-      buttonsP2[i].mouseover(function(){
-        $messageDisplay.text(movesP2[i].description);
-      });
-      buttonsP2[i].on('click', function(){
-        if(playerturn === 2){
-          attack((movesP2[i]), p2, p1, 2);
-        }
+      buttons[i].on('click', function() {
+        attack(moves[i], player, opponant, id);
       });
     }
   };
 
+  const disableButtons = function() {
+    $('button').off('click');
+  };
+
+  //------------------------ BATTLE INTRO SECTION -------------------------------
+  const battlestartAnimation = function() { //plays the intro animation for the battle screen
+    t1 = setTimeout(battleIntroStage1, 4500);
+    t2 = setTimeout(battleIntroStage2, 6560);
+    t3 = setTimeout(battleIntroStage3, 9560);
+    t4 = setTimeout(battleIntroStage4, 10560);
+    t5 = setTimeout(battleIntroStage5, 13560);
+  };
+
+  const battleIntroStage1 = function() {
+    $('.battleIntro').addClass('hidden');
+    $('.battle').removeClass('hidden');
+  };
+
+  const battleIntroStage2 = function() {
+    $('.codemonImageP1.front').fadeIn();
+    $('.codemonImageP1.back').fadeIn();
+    $('.mainAudio').prop('volume', 0.5);
+    $messageDisplay.text(`${p1.name} sent out ${p1.chosen.name}`);
+    $('.additionalSound').attr('src', `${p1.chosen.sound}`);
+    $('.additionalSound').prop('autoplay', true);
+  };
+
+  const battleIntroStage3 = () => $('.mainAudio').prop('volume', 1);
+
+  const battleIntroStage4 = function() {
+    $('.codemonImageP2.front').fadeIn();
+    $('.codemonImageP2.back').fadeIn();
+    $('.mainAudio').prop('volume', 0.5);
+    $messageDisplay.text(`${p2.name} sent out ${p2.chosen.name}`);
+    $('.additionalSound').attr('src', `${p2.chosen.sound}`);
+    $('.additionalSound').prop('autoplay', true);
+  };
+
+  const battleIntroStage5 = () => $('.mainAudio').prop('volume', 1);
+
+  //-------------------------- BATTLE SECTION -----------------------------------
   const changeTurns = function() {
+    const movesP1 = [p1.chosen.m1, p1.chosen.m2, p1.chosen.m3, p1.chosen.m4];
+    const buttonsP1 = [$attButtP1A1, $attButtP1A2, $attButtP1A3, $attButtP1A4];
+    const movesP2 = [p2.chosen.m1, p2.chosen.m2, p2.chosen.m3, p2.chosen.m4];
+    const buttonsP2 = [$attButtP2A1, $attButtP2A2, $attButtP2A3, $attButtP2A4];
     if (playerturn === 1) {
       playerturn = 2;
       $player1display.toggleClass('inactive');
       $player2display.toggleClass('inactive');
+      buttonsetup(movesP2, buttonsP2, p2, p1, 2);
       if(computerPlayer) {
         computerAttack();
         $player1display.toggleClass('inactive');
-        $('button').toggleClass('inactiveButtons');
       }
     } else {
       playerturn = 1;
       $player2display.toggleClass('inactive');
       $player1display.toggleClass('inactive');
+      buttonsetup(movesP1, buttonsP1, p1, p2, 1);
       if(computerPlayer) {
         $player1display.toggleClass('inactive');
-        $('button').toggleClass('inactiveButtons');
       }
     }
     hit = true;
   };
 
   const attack = function(move, attackingPlayer, defendingPlayer, playerID) {
-    miss();
+    $(`.player${playerID.toString()}options button`).addClass('inactiveButtons');
+    disableButtons();
+    hitOrMiss();
     statsUpdate(move, attackingPlayer, defendingPlayer, playerID);
-    if (hit) {
-      const result = attackHPEffect(move.basePower, attackingPlayer.attack, defendingPlayer.defence, move.range);
-      if(playerID === 1){
-        p2.hp -= result;
-      } else {
-        p1.hp -= result;
-      }
-    }
-    animation(move, attackingPlayer.chosen, defendingPlayer.chosen, playerID);
-    setTimeout(changeTurns, (delayTimer*3));
-    checkwinner();
+    hit ? damage(move, attackingPlayer, defendingPlayer, playerID) : '';
+    move.basePower > 0 ? animation(move, attackingPlayer.chosen, defendingPlayer.chosen, playerID) : '';
+    t6 = setTimeout(changeTurns, (delayTimer*3));
+    checkwinner(attackingPlayer, defendingPlayer, playerID);
+    console.log(`end attack player turn is now ${playerturn}`);
   };
 
-  const miss = function() {
+  const hitOrMiss = function() {
     if (Math.floor(Math.random()*100) < 15) {
       hit = false;
+    }
+  };
+
+  const attackIncrease = function(move, attackingPlayer) {
+    attackingPlayer.attack += (Math.floor(Math.random()*3)+1)*move.attackEffect;
+  };
+
+  const defenceDecrease = function (move, defendingPlayer) {
+    defendingPlayer.defence -= (Math.floor(Math.random()*3)+1)*move.defenceEffect;
+  };
+
+  const playMoveSound = function(move) {
+    $('.mainAudio').prop('volume', 0.5);
+    $('.additionalSound').attr('src', `${move.sound}`);
+  };
+
+  const attackIncreaseMessage = function(attackingPlayer) {
+    $messageDisplay.text(`${attackingPlayer.chosen.name}'s attack incresed!`);
+  };
+
+  const defenceDecreaseMessage = function(defendingPlayer) {
+    $messageDisplay.text(`${defendingPlayer.chosen.name}'s defence was lowered!`);
+  };
+
+  const startMoveAnimation = function(move, playerID) {
+    $(`.impactAnimationP${playerID.toString()}`).removeClass('hidden');
+    $(`.impactAnimationP${playerID.toString()}`).css('background-image', `url(./css/images/${move.animation}`);
+  };
+
+  const endMoveAnimation = function(playerID) {
+    $(`.impactAnimationP${playerID.toString()}`).addClass('hidden');
+  };
+
+  const statsUpdate = function(move, attackingPlayer, defendingPlayer, playerID) {
+    if (move.attackEffect > 0) {
+      attackIncrease(move, attackingPlayer);
+      playerID === 1 ? playerID = 2 : playerID = 1; //switches the player ID so that the animation appears on the attacking codemon
+      t7 = setTimeout(function(){
+        playMoveSound(move);
+        attackIncreaseMessage(attackingPlayer);
+        startMoveAnimation(move, playerID);
+      }, delayTimer);
+      t8 = setTimeout(function(){
+        endMoveAnimation(playerID);
+      }, (delayTimer * 1.5));
+    } else if (move.defenceEffect > 0) {
+      defenceDecrease(move, defendingPlayer);
+      t9 = setTimeout(function(){
+        playMoveSound(move);
+        defenceDecreaseMessage(defendingPlayer);
+        startMoveAnimation(move, playerID);
+      }, delayTimer);
+      t10 = setTimeout(function(){
+        endMoveAnimation(playerID);
+      }, (delayTimer * 1.5));
+    }
+    move.attackEffect > 0 || move.defenceEffect > 0 ? hit=true : '';
+  };
+
+  const damage = function(move, attackingPlayer, defendingPlayer, playerID) {
+    const result = attackHPEffect(move.basePower, attackingPlayer.attack, defendingPlayer.defence, move.range);
+    if(playerID === 1){
+      p2.hp -= result;
+    } else {
+      p1.hp -= result;
     }
   };
 
@@ -320,69 +416,31 @@ $(function(){
     }
   };
 
-  const statsUpdate = function(move, attackingPlayer, defendingPlayer, playerID) {
-    if (move.attackEffect > 0) {
-      attackingPlayer.attack += (Math.floor(Math.random()*3)+1)*move.attackEffect;
-      hit = true;
-      if(playerID === 1){
-        playerID = 2;
-      } else {
-        playerID = 1;
-      }
-      setTimeout(function(){
-        $('.mainAudio').prop('volume', 0.5);
-        $('.additionalSound').attr('src', `${move.sound}`);
-        $messageDisplay.text(`${attackingPlayer.chosen.name}'s attack incresed!`);
-        $(`.impactAnimationP${playerID.toString()}`).removeClass('hidden');
-        $(`.impactAnimationP${playerID.toString()}`).css('background-image', `url(./css/images/${move.animation}`);
+  const attackMessageBox = function(move, attcodemon) {
+    $messageDisplay.text(`${attcodemon.name} used ${move.name}!`);
+    if(hit === false) {
+      t11 = setTimeout(function() {
+        $messageDisplay.text(`${attcodemon.name}'s attack missed!!`);
       }, delayTimer);
-      setTimeout(function(){
-        $(`.impactAnimationP${playerID.toString()}`).addClass('hidden');
-      }, (delayTimer * 1.5));
-    } else if (move.defenceEffect > 0) {
-      defendingPlayer.defence -= (Math.floor(Math.random()*3)+1)*move.defenceEffect;
-      hit = true;
-      setTimeout(function(){
-        $('.mainAudio').prop('volume', 0.5);
-        $('.additionalSound').attr('src', `${move.sound}`);
-        $messageDisplay.text(`${defendingPlayer.chosen.name}'s defence was lowered!`);
-        $(`.impactAnimationP${playerID.toString()}`).removeClass('hidden');
-        $(`.impactAnimationP${playerID.toString()}`).css('background-image', `url(./css/images/${move.animation}`);
-      }, delayTimer);
-      setTimeout(function(){
-        $(`.impactAnimationP${playerID.toString()}`).addClass('hidden');
-      }, (delayTimer * 1.5));
     }
   };
 
   const animation = function(move, attcodemon, defCodemon, playerID) {
-    $messageDisplay.text(`${attcodemon.name} used ${move.name}!`);
-    if(hit === false) {
-      setTimeout(function(){
-        $messageDisplay.text(`${attcodemon.name}'s attack missed!!`);
-      }, delayTimer);
-    } else if (move.basePower > 0) {
-      setTimeout(function(){
-        $(`.impactAnimationP${playerID.toString()}`).removeClass('hidden');
-        $('.mainAudio').prop('volume', 0.5);
-        $('.additionalSound').attr('src', `${move.sound}`);
-        $(`.impactAnimationP${playerID.toString()}`).css('background-image', `url(./css/images/${move.animation}`);
-      }, (delayTimer * 1.1));
-      setTimeout(function(){
-        $(`.impactAnimationP${playerID.toString()}`).addClass('hidden');
-      }, (delayTimer * 1.9));
-      setTimeout(function() {
-        displayDamage(playerID);
-      }, (delayTimer * 2));
-    }
+    attackMessageBox(move, attcodemon);
+    t12 = setTimeout(function(){
+      startMoveAnimation(move, playerID);
+      playMoveSound(move);
+    }, (delayTimer * 1.1));
+    t13 = setTimeout(function(){
+      endMoveAnimation(playerID);
+    }, (delayTimer * 1.9));
+    t14 = setTimeout(function() {
+      displayDamage(playerID);
+    }, (delayTimer * 2));
   };
 
   const displayDamage = function(playerID) {
-    if(playerID === 1) {
-      updatebars(p2.hp, $p2bar);
-    } else {
-      updatebars(p1.hp, $p1bar);
-    }
+    playerID === 1 ? updatebars(p2.hp, $p2bar) : updatebars(p1.hp, $p1bar);
   };
 
   const updatebars = function(hp, player) {
@@ -394,72 +452,87 @@ $(function(){
     }
   };
 
-  const checkwinner = function() {
-    if (p2.hp <= 0) {
-      p2.hp = 0;
-      playerturn = 0;
-      setTimeout(function(){
-        $('.codemonImageP2').fadeOut();
-        $messageDisplay.text(`${p2.name}'s ${p2.chosen.name} has fainted!`);
-      }, (delayTimer * 4));
-      setTimeout(function(){
+  const faint = function(player, playerID) {
+    player.hp = 0;
+    playerturn = 0;
+    playerID === 1 ? playerID = 2 : playerID = 1;
+    t15 = setTimeout(function(){
+      $(`.codemonImageP${playerID.toString()}`).fadeOut();
+      $messageDisplay.text(`${player.name}'s ${player.chosen.name} has fainted!`);
+    }, (delayTimer * 4));
+  };
+
+  const checkwinner = function(attackingPlayer, defendingPlayer, playerID) {
+    if (defendingPlayer.hp <= 0) {
+      faint(defendingPlayer, playerID);
+      t16 = setTimeout(function(){
         $('.battle').addClass('hidden');
         $('.winner').removeClass('hidden');
-        $('.winnerName').text(`${p1.name}`);
+        $('.winnerName').text(`${attackingPlayer.name}`);
         $('.mainAudio').attr('src', './sounds/endgame.mp3');
-        playerturn = 0;
-      }, (delayTimer * 5));
-    } else if(p1.hp <= 0) {
-      p1.hp = 0;
-      setTimeout(function(){
-        $('.codemonImageP1').fadeOut();
-        $messageDisplay.text(`${p1.name}'s ${p1.chosen.name} has fainted!`);
-      }, (delayTimer * 4));
-      setTimeout(function(){
-        $('.battle').addClass('hidden');
-        $('.winner').removeClass('hidden');
-        $('.winnerName').text(`${p1.name}`);
-        $('.mainAudio').attr('src', './sounds/endgame.mp3');
-        playerturn = 0;
       }, (delayTimer * 5));
     } else {
       return;
     }
   };
 
-  $('.winner button[name="playAgain"]').on('click', function(){
-    $('.winner').addClass('hidden');
-    $('.startPage').removeClass('hidden');
-    $('.mainAudio').attr('src', './sounds/startPage.mp3');
-    p1.name = '';
-    p1.attack = 0;
-    p1.defence = 0;
-    p1.hp = 100;
-    p2.name = '';
-    p2.attack = 0;
-    p2.defence = 0;
-    p2.hp = 100;
-    $('.codemonImageP1').css('display', 'inherit');
-    $('.codemonImageP2').css('display', 'inherit');
-    $('.player1Name').val('');
-    $('.player2Name').val('');
-    computerPlayer = false;
-    $('.codemonNameP2').text('');
-    $('.codemonImageP1.front').css('background', '');
-    $('.codemonImageP1.back').css('background', '');
-    $('.codemonImageP2.front').css('background', '');
-    $('.codemonImageP2.back').css('background', '');
-    $messageDisplay.text('');
-    clearTimeout(delayTimer);
-    delayTimer = 2000;
-  });
-
   const computerAttack = function() {
-    setTimeout(function() {
+    t17 = setTimeout(function() {
       const movesP2 = [p2.chosen.m1, p2.chosen.m2, p2.chosen.m3, p2.chosen.m4];
       const move = movesP2[Math.floor(Math.random()*3)];
       attack(move, p2, p1, 2);
     }, delayTimer);
+  };
+
+  $('.winner button[name="playAgain"]').on('click', function(){
+    clearTimeout(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17);
+    $('.winner').addClass('hidden');
+    $('.startPage').removeClass('hidden');
+    $('.mainAudio').attr('src', './sounds/selectionScreen.mp3');
+    computerPlayer ? computerPlayerCssReset() : '';
+    playerAndStatsReset();
+    cssReset();
+    console.log(`Game over player turn is now ${playerturn}`);
+  });
+
+  const playerAndStatsReset = function() {
+    p1.name = p2.name = '';
+    p1.attack = p1.defence = p2.attack = p2.defence = 0;
+    p1.hp = p2.hp = 100;
+    playerturn = 1;
+  };
+
+  const cssReset = function() {
+    $p1bar.css('width', '100%');
+    $p2bar.css('width', '100%');
+    $p1bar.css('background', 'green');
+    $p2bar.css('background', 'green');
+    computerPlayer = false;
+    $('.codemonImageP1, .codemonImageP2, .codemonImageP1.front, .codemonImageP1.back, .codemonImageP2.front, .codemonImageP2.back').css('background', '');
+    $('.player1Name, .player2Name').val('');
+    $('.codemonNameP2').text('');
+    $player1display.removeClass('inactive');
+    $player2display.addClass('inactive');
+    $('.codemonImageP1, .codemonImageP2').attr('style', '');
+    updateSelectionDisplay(0, 'P1');
+    updateSelectionDisplay(0, 'P2');
+    $messageDisplay.text('');
+  };
+
+  const computerPlayerCssReset = function() {
+    $('.computer').removeClass('hidden');
+    $('.codemonSelection').css('width', '50%');
+    $('button.p2').removeClass('hidden');
+    $('button[name="start"]').css('top', '700px');
+    $('#player2Screen').removeClass('hidden');
+    $('#player1Screen').css('width', '50%');
+    $('#player1Screen').css('background-size', 'cover');
+    $('.codemonImageP1').css('height', '100px');
+    $('.player1Options').css('position', 'static');
+    $('.player1Options').css('bottom', 'auto');
+    $('.impactAnimationP1 .impactAnimationP2').css('margin', '30px 50px');
+    $('.impactAnimationP2').css('width', '100px');
+    $('.bottomHalf').css('padding', '0');
   };
 
 });
