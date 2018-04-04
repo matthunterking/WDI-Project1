@@ -199,8 +199,6 @@ $(function(){
   updateSelectionDisplay(index, 'P1');
   updateSelectionDisplay(index, 'P2');
 
-
-
   $('button[name="start"]').on('click', function(){
     computerPlayer ? computerSetUp() : '';
     $('.characterselection').addClass('hidden');
@@ -329,7 +327,6 @@ $(function(){
   };
 
   const attack = function(move, attackingPlayer, defendingPlayer, playerID) {
-    console.log(playerturn);
     disableButtons();
     hitOrMiss();
     statsUpdate(move, attackingPlayer, defendingPlayer, playerID);
