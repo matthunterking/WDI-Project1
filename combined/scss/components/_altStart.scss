@@ -1,0 +1,36 @@
+.room {
+  width: 45%;
+  height: 557px;
+  position: relative;
+  left: 23%;
+  background-image: url(./images/altStart.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.altStartPlayer {
+  width: 75px;
+  height: 90px;
+  background-image: url(./images/trainerdown.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 91px;
+  left: 208px;
+}
+
+.otheralernateplayer {
+  width: 75px;
+  height: 90px;
+  background-image: url(./images/trainerup.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 15%;
+  left: 0%;
+}
+
+.altmessagebox {
+  border: 2px solid black;
+}
