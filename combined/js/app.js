@@ -23,6 +23,9 @@ $(function(){
   let t15;
   let t16;
   let t17;
+  let t18;
+  let t19;
+
 
   //-------------------------- SELECTORS ---------------------------------------
   const $attButtP1A1 = $('.player1Options button[name="attack1"]'); //used for event listeners when game is loaded
@@ -102,17 +105,37 @@ $(function(){
 
   const $room = $('.alternateStart');
 
-  let boundary = $room.width() - $player.width();
-
   let keyPressed;
 
   let moveDistance = 4;
 
-  let leftposition = 208;
+  let leftposition = 176;
 
-  let topposition = 91;
+  let topposition = 159;
 
   let step = 0;
+
+  const altmessages = function() {
+    if (leftposition > 144 && leftposition < 212 && topposition > 330 && topposition < 335) {
+      $('.altmessagebox').text(`There's no time to play the N64 I should talk to my friend`);
+    }
+    if(leftposition > 348 && topposition < 111) {
+      $('.altmessagebox').text(`Don't leave! Come and see what I'm playing on the computer!`);
+    }
+    if ((leftposition < 60 && topposition > 63 && topposition < 115) || (leftposition < 40 && topposition < 115)) {
+      $('.mainAudio').attr('src', './sounds/startpage.mp3');
+      $('.altmessagebox').text(`Check it out I'm playing this cool new game by the Web Developer Matt Hunter-King`);
+      t18 = setTimeout(function(){
+        $('.altmessagebox').text(`It's very cool, it's like pokemon but with code. Lets play!`);
+      }, 6000);
+      t19 = setTimeout(function(){
+        $('.alternateStart').addClass('hidden');
+        $('.startPage').removeClass('hidden');
+      }, 13000);
+      // clearTimeout(t18, t19);
+      $(window).off('keyup keydown keypress');
+    }
+  };
 
   $(window).keydown(function(e) {
     keyPressed=e.which;
@@ -120,132 +143,107 @@ $(function(){
   });
   $(window).keyup(function() {
     keyPressed = 0;
-    altMessages();
   });
-
 
   const arrowKeys = function(keyPressed) {
     switch (keyPressed) {
       case 37: //left
-        if (leftposition > 0) {
+        if ((leftposition > 0)
+        && !(leftposition > 0 && leftposition < 52 && topposition > 283 && topposition < 380)
+      && !(leftposition > -1 && leftposition < 165 && topposition > 18 && topposition < 60)
+      && !(leftposition > 120 && leftposition < 220 && topposition > 168 && topposition < 330)
+      && !(leftposition > 293 && leftposition < 393 && topposition > 293 && topposition < 380)
+        ) {
           leftposition -= moveDistance;
           $player.css('left', `${leftposition.toString()}px`);
-          switch (step) {
-            case 0:
-              $player.css('backgroundImage', 'url(./css/images/trainerleft.png)');
-              step = 1;
-              break;
-            case 1:
-              $player.css('backgroundImage', 'url(./css/images/trainerleft1.png)');
-              step = 2;
-              break;
-            case 2:
-              $player.css('backgroundImage', 'url(./css/images/trainerleft2.png)');
-              step = 0;
-              break;
-          }
+        }
+        switch (step) {
+          case 0:
+            $player.css('backgroundImage', 'url(./css/images/trainerleft.png)');
+            step = 1;
+            break;
+          case 1:
+            $player.css('backgroundImage', 'url(./css/images/trainerleft1.png)');
+            step = 2;
+            break;
+          case 2:
+            $player.css('backgroundImage', 'url(./css/images/trainerleft2.png)');
+            step = 0;
+            break;
         }
         break;
       case 38: //up
-        if (topposition > -46) {
+        if (topposition > 19
+        && !(leftposition > -1 && leftposition < 165 && topposition > 18 && topposition < 64)
+      && !(leftposition > 120 && leftposition < 210 && topposition > 168 && topposition < 335)) {
           topposition -= moveDistance;
           $player.css('top', `${topposition.toString()}px`);
-          switch (step) {
-            case 0:
-              $player.css('backgroundImage', 'url(./css/images/trainerup.png)');
-              step = 1;
-              break;
-            case 1:
-              $player.css('backgroundImage', 'url(./css/images/trainerup1.png)');
-              step = 2;
-              break;
-            case 2:
-              $player.css('backgroundImage', 'url(./css/images/trainerup2.png)');
-              step = 0;
-              break;
-          }
+        }
+        switch (step) {
+          case 0:
+            $player.css('backgroundImage', 'url(./css/images/trainerup.png)');
+            step = 1;
+            break;
+          case 1:
+            $player.css('backgroundImage', 'url(./css/images/trainerup1.png)');
+            step = 2;
+            break;
+          case 2:
+            $player.css('backgroundImage', 'url(./css/images/trainerup2.png)');
+            step = 0;
+            break;
         }
         break;
       case 39: //right
-        if (leftposition < 487) {
+        if (leftposition < 404
+        && !(leftposition > 118 && leftposition < 210 && topposition > 168 && topposition < 330)
+        && !(leftposition > 290 && leftposition < 392 && topposition > 293 && topposition < 380)
+        ) {
           leftposition += moveDistance;
           $player.css('left', `${leftposition.toString()}px`);
-          switch (step) {
-            case 0:
-              $player.css('backgroundImage', 'url(./css/images/trainerright.png)');
-              step = 1;
-              break;
-            case 1:
-              $player.css('backgroundImage', 'url(./css/images/trainerright1.png)');
-              step = 2;
-              break;
-            case 2:
-              $player.css('backgroundImage', 'url(./css/images/trainerright2.png)');
-              step = 0;
-              break;
-          }
+        }
+        switch (step) {
+          case 0:
+            $player.css('backgroundImage', 'url(./css/images/trainerright.png)');
+            step = 1;
+            break;
+          case 1:
+            $player.css('backgroundImage', 'url(./css/images/trainerright1.png)');
+            step = 2;
+            break;
+          case 2:
+            $player.css('backgroundImage', 'url(./css/images/trainerright2.png)');
+            step = 0;
+            break;
         }
         break;
       case 40: //down
-        if (topposition < 377) {
+        if (topposition < 377 &&
+          !(leftposition > -1 && leftposition < 52 && topposition > 283 && topposition < 380)
+      && !(leftposition > 120 && leftposition < 210 && topposition > 164 && topposition < 330)
+      && !(leftposition > 293 && leftposition < 392 && topposition > 287 && topposition < 380)
+        ) {
           topposition += moveDistance;
           $player.css('top', `${topposition.toString()}px`);
-          switch (step) {
-            case 0:
-              $player.css('backgroundImage', 'url(./css/images/trainerdown.png)');
-              step = 1;
-              break;
-            case 1:
-              $player.css('backgroundImage', 'url(./css/images/trainerdown1.png)');
-              step = 2;
-              break;
-            case 2:
-              $player.css('backgroundImage', 'url(./css/images/trainerdown2.png)');
-              step = 0;
-              break;
-          }
         }
-        break;
-      case 32:
-        if ((leftposition < 88 && topposition <0) || (leftposition < 8 && topposition < 71)) {
-          $('.mainAudio').attr('src', './sounds/startpage.mp3');
-          $('.altmessagebox').text(`Check it out I'm playing this cool new game by the Web Developer Matt Hunter-King`);
-          setTimeout(function(){
-            $('.altmessagebox').text(`It's very cool, it's like pokemon but with code. Lets play!`);
-          }, 6000);
-          setTimeout(function(){
-            $('.alternateStart').addClass('hidden');
-            $('.startPage').removeClass('hidden');
-          }, 13000);
+        switch (step) {
+          case 0:
+            $player.css('backgroundImage', 'url(./css/images/trainerdown.png)');
+            step = 1;
+            break;
+          case 1:
+            $player.css('backgroundImage', 'url(./css/images/trainerdown1.png)');
+            step = 2;
+            break;
+          case 2:
+            $player.css('backgroundImage', 'url(./css/images/trainerdown2.png)');
+            step = 0;
+            break;
         }
         break;
     }
+    altmessages();
   };
-
-  const altMessages = function(){
-    if(leftposition > 428 && topposition < 23) {
-      $('.altmessagebox').text(`Don't leave! Come and see what I'm playing on the computer!`);
-    }
-  }
-
-  // setInterval(function() {
-  //   $player.css({
-  //     left: function(i,v) { return move(v, 37, 39); },
-  //     top: function(i,v) { return move(v, 38, 40); }
-  //   });
-  // }, 20);
-  //
-  // function move(v,a,b) {
-  //   var n = parseInt(v, 10) - (keyPressed[a] ? moveDistance : 0) + (keyPressed[b] ? moveDistance : 0);
-  //   return n < 0 ? 0 : n > boundary ? boundary : n;
-  // }
-
-
-
-// left arrow	37
-// up arrow	38
-// right arrow	39
-// down arrow	40
 
   //------------------------------ START PAGE ----------------------------------
   $('#startGame').on('click', function(){
@@ -271,6 +269,7 @@ $(function(){
   const checkFor2Players = function(p1, p2) {
     if (p1 && p2) {
       $('.startPage').addClass('hidden');
+      console.log($('.startPage'));
       $('.characterselection').removeClass('hidden');
     } else {
       alert('Please enter a name for both player 1 and player 2');
@@ -355,6 +354,7 @@ $(function(){
     $('.characterselection').addClass('hidden');
     $('.battleIntro').removeClass('hidden');
     $('audio').attr('src', './sounds/battleScreen.mp3');
+    $('.startPage').addClass('hidden');
     battleScreenFormatting();
     const movesP1 = [p1.chosen.m1, p1.chosen.m2, p1.chosen.m3, p1.chosen.m4];
     const buttonsP1 = [$attButtP1A1, $attButtP1A2, $attButtP1A3, $attButtP1A4];
@@ -409,7 +409,7 @@ $(function(){
   };
 
   //------------------------ BATTLE INTRO SECTION -------------------------------
-  const battlestartAnimation = function() { //plays the intro animation for the battle screen
+  const battlestartAnimation = function() {//plays the intro animation for the battle screen
     t1 = setTimeout(battleIntroStage1, 4500);
     t2 = setTimeout(battleIntroStage2, 6560);
     t3 = setTimeout(battleIntroStage3, 9560);
@@ -420,6 +420,7 @@ $(function(){
   const battleIntroStage1 = function() {
     $('.battleIntro').addClass('hidden');
     $('.battle').removeClass('hidden');
+    console.log($('.startPage'));
   };
 
   const battleIntroStage2 = function() {
@@ -429,9 +430,12 @@ $(function(){
     $messageDisplay.text(`${p1.name} sent out ${p1.chosen.name}`);
     $('.additionalSound').attr('src', `${p1.chosen.sound}`);
     $('.additionalSound').prop('autoplay', true);
+    console.log($('.startPage'));
   };
 
-  const battleIntroStage3 = () => $('.mainAudio').prop('volume', 1);
+  const battleIntroStage3 = function() {
+    $('.mainAudio').prop('volume', 1);
+  };
 
   const battleIntroStage4 = function() {
     $('.codemonImageP2.front').fadeIn();
