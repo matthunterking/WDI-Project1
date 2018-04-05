@@ -59,13 +59,13 @@ $(function(){
     }
   }
 
-  const move1 = new Move('Code Smash',0,0,500,5, 'A powerful code attack with a small attack range', 'pow.png', './sounds/smash.wav');
-  const move2 = new Move('Delete the semicolon',0,2,0,0,'Decrases the defence of your opponant', 'download.png', './sounds/semi.wav');
+  const move1 = new Move('Code Smash',0,0,20,5, 'A powerful code attack with a small attack range', 'pow.png', './sounds/smash.wav');
+  const move2 = new Move('Delete the Semicolon',0,2,0,0,'Decrases the defence of your opponant', 'download.png', './sounds/semi.wav');
   const move3 = new Move('Install jQuery',2,0,0,0,'Increases your attack','upload.png', './sounds/install.wav');
-  const move4 = new Move('All the brackets',0,0,10,15,'Throws <{]{][>]}} at your opponant. Has a high attack range', 'brackets.png', './sounds/brackets.wav');
+  const move4 = new Move('All the Brackets',0,0,10,15,'Throws <{]{][>]}} at your opponant. Has a high attack range', 'brackets.png', './sounds/brackets.wav');
   const move5 = new Move('Rainbow Puke',0,0,15,10,'A barrage of additional colors for no reason. Has a meduim attack range', 'rainbow.png', './sounds/rainbow.wav');
-  const move6 = new Move('Return undefined',0,0,25,0,'Returns undefined to your opponant', 'undefined.png', './sounds/undefined.wav');
-  const move7 = new Move('404 Not Found',0,0,20,7,'Throws a none completed site at your opponant. Has a meduim attack range', '404.png', './sounds/404.wav');
+  const move6 = new Move('Return Undefined',0,0,25,0,'Returns undefined to your opponant', 'undefined.png', './sounds/undefined.wav');
+  const move7 = new Move('404 Not Found',0,0,20,7,'Throws an incompleted site at your opponant. Has a meduim attack range', '404.png', './sounds/404.wav');
 
   class Codemon {
     constructor(name, attack, defence, m1, m2, m3, m4, frontImage, backImage, sound) {
@@ -103,11 +103,9 @@ $(function(){
 
   const $player = $('.altStartPlayer');
 
-  const $room = $('.alternateStart');
-
   let keyPressed;
 
-  let moveDistance = 4;
+  const moveDistance = 4;
 
   let leftposition = 176;
 
@@ -124,6 +122,7 @@ $(function(){
     }
     if ((leftposition < 60 && topposition > 63 && topposition < 115) || (leftposition < 40 && topposition < 115)) {
       $('.mainAudio').attr('src', './sounds/startpage.mp3');
+      $('.screencolor').removeClass('hidden');
       $('.altmessagebox').text(`Check it out I'm playing this cool new game by the Web Developer Matt Hunter-King`);
       t18 = setTimeout(function(){
         $('.altmessagebox').text(`It's very cool, it's like pokemon but with code. Lets play!`);
@@ -131,8 +130,8 @@ $(function(){
       t19 = setTimeout(function(){
         $('.alternateStart').addClass('hidden');
         $('.startPage').removeClass('hidden');
+        $('.screencolor').addClass('hidden');
       }, 13000);
-      // clearTimeout(t18, t19);
       $(window).off('keyup keydown keypress');
     }
   };
@@ -692,7 +691,7 @@ $(function(){
     $('.codemonImageP1').css('height', '100px');
     $('.player1Options').css('position', 'static');
     $('.player1Options').css('bottom', 'auto');
-    $('.impactAnimationP1 .impactAnimationP2').css('margin', '30px 50px');
+    $('.impactAnimationP1, .impactAnimationP2').css('margin', '30px 50px');
     $('.impactAnimationP2').css('width', '100px');
     $('.bottomHalf').css('padding', '0');
   };
