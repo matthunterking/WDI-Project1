@@ -25,6 +25,7 @@ $(function(){
   let t17;
   let t18;
   let t19;
+  let t20;
 
 
   //-------------------------- SELECTORS ---------------------------------------
@@ -144,6 +145,29 @@ $(function(){
     keyPressed = 0;
   });
 
+  const walk = function(direction) {
+    switch (step) {
+      case 0:
+        $player.css('backgroundImage', `url(./css/images/trainer${direction}.png)`);
+        t20 = setTimeout(function(){
+          step = 1;
+        }, 100);
+        break;
+      case 1:
+        $player.css('backgroundImage', `url(./css/images/trainer${direction}1.png)`);
+        t20 = setTimeout(function(){
+          step = 2;
+        }, 100);
+        break;
+      case 2:
+        $player.css('backgroundImage', `url(./css/images/trainer${direction}2.png)`);
+        t20 = setTimeout(function(){
+          step = 0;
+        }, 100);
+        break;
+    }
+  };
+
   const arrowKeys = function(keyPressed) {
     switch (keyPressed) {
       case 37: //left
@@ -156,20 +180,7 @@ $(function(){
           leftposition -= moveDistance;
           $player.css('left', `${leftposition.toString()}px`);
         }
-        switch (step) {
-          case 0:
-            $player.css('backgroundImage', 'url(./css/images/trainerleft.png)');
-            step = 1;
-            break;
-          case 1:
-            $player.css('backgroundImage', 'url(./css/images/trainerleft1.png)');
-            step = 2;
-            break;
-          case 2:
-            $player.css('backgroundImage', 'url(./css/images/trainerleft2.png)');
-            step = 0;
-            break;
-        }
+        walk('left');
         break;
       case 38: //up
         if (topposition > 19
@@ -178,20 +189,7 @@ $(function(){
           topposition -= moveDistance;
           $player.css('top', `${topposition.toString()}px`);
         }
-        switch (step) {
-          case 0:
-            $player.css('backgroundImage', 'url(./css/images/trainerup.png)');
-            step = 1;
-            break;
-          case 1:
-            $player.css('backgroundImage', 'url(./css/images/trainerup1.png)');
-            step = 2;
-            break;
-          case 2:
-            $player.css('backgroundImage', 'url(./css/images/trainerup2.png)');
-            step = 0;
-            break;
-        }
+        walk('up');
         break;
       case 39: //right
         if (leftposition < 404
@@ -201,20 +199,7 @@ $(function(){
           leftposition += moveDistance;
           $player.css('left', `${leftposition.toString()}px`);
         }
-        switch (step) {
-          case 0:
-            $player.css('backgroundImage', 'url(./css/images/trainerright.png)');
-            step = 1;
-            break;
-          case 1:
-            $player.css('backgroundImage', 'url(./css/images/trainerright1.png)');
-            step = 2;
-            break;
-          case 2:
-            $player.css('backgroundImage', 'url(./css/images/trainerright2.png)');
-            step = 0;
-            break;
-        }
+        walk('right');
         break;
       case 40: //down
         if (topposition < 377 &&
@@ -225,20 +210,7 @@ $(function(){
           topposition += moveDistance;
           $player.css('top', `${topposition.toString()}px`);
         }
-        switch (step) {
-          case 0:
-            $player.css('backgroundImage', 'url(./css/images/trainerdown.png)');
-            step = 1;
-            break;
-          case 1:
-            $player.css('backgroundImage', 'url(./css/images/trainerdown1.png)');
-            step = 2;
-            break;
-          case 2:
-            $player.css('backgroundImage', 'url(./css/images/trainerdown2.png)');
-            step = 0;
-            break;
-        }
+        walk('down');
         break;
     }
     altmessages();
