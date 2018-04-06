@@ -2,21 +2,163 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src='app.js'></script>
-    <title>CODEMON VERSION 1</title>
+    <script type="text/javascript" src='./js/app.js'></script>
+    <title>CODEMON!</title>
   </head>
   <body>
-    <h1>CODÉMON!</h1>
-    <div class="codemon1">CSS</div>
-    <div class="p1HP"></div>
-    <button type="button" name="button" id='p1Attack1'>Player 1 Attack1!</button>
-    <button type="button" name="button" id='p1Attack2'>Player 1 Attack2!</button>
-    <div class="codemon2">YAVASCRIPT</div>
-    <div class="p2HP"></div>
-    <button type="button" name="button" id='p2Attack1'>Player 2 Attack1!</button>
-    <button type="button" name="button" id='p2Attack2'>Player 2 Attack2!</button>
+    <audio class="mainAudio" src='./sounds/room.mp3' autoplay loop></audio>
+    <audio class="additionalSound" src=''></audio>
+    <h1 class="hidden">CODÉMON</h1>
+    <img class="logo" src="./css/images/CODEMON-logo.png" alt="">
+
+  <section class="alternateStart">
+    <div class="room">
+    <div class="otheralernateplayer"></div>
+    <div class="screencolor hidden"></div>
+    <div class="altStartPlayer"></div>
+  </div>
+    <div class="messageBox altmessagebox">Use the arrows to move</div>
+    </div>
+  </section>
+
+    <section class="startPage hidden">
+      <img class="startLogo" src="./css/images/CODEMON-logo.png" alt="">
+      <div class='startAnimationBox'></div>
+      <form>
+        <div class="playerNameInput">
+          <p>Enter Player 1 Name</p><input class="player1Name"></input>
+        </div>
+        <button type="button" name="button" id='startGame'>Fight!</button>
+        <div class="playerNameInput">
+          <p>Enter Player 2 Name</p><input class="player2Name"></input>
+          <button type="button" name="button" id="computerPlayer">Play against the computer</button>
+    </div>
+      </form>
+    </section>
+
+    <section class="characterselection hidden">
+      <div class="codemonSelection">
+        <p class="player1Name selectionScreenName"></p>
+          <div class="codemonImageP1"></div>
+          <div class="codemonStats">
+            <span class='codemonNameP1'></span>
+            <p>Attack: <span class='codemonAttackP1'></span></p>
+            <p>Defence: <span class='codemonDefenceP1'></span></p>
+            <p>Moves</p>
+            <span class='codemonMove1P1'></span>
+            <span class='codemonMove2P1'></span>
+            <span class='codemonMove3P1'></span>
+            <span class='codemonMove4P1'></span>
+            </div>
+
+        <button type="button" name="previous" class="P1">Previous</button>
+        <button type="button" name="next" class="P1">Next</button>
+        </div>
+      </div>
+      <div class="codemonSelection computer">
+        <p class="player2Name selectionScreenName"></p>
+        <div class="codemonImageP2"></div>
+        <div class="codemonStats">
+          <span class='codemonNameP2'></span>
+          <p>Attack: <span class='codemonAttackP2'></span></p>
+          <p>Defence: <span class='codemonDefenceP2'></span></p>
+          <p>Moves</p>
+          <span class='codemonMove1P2'></span>
+          <span class='codemonMove2P2'></span>
+          <span class='codemonMove3P2'></span>
+          <span class='codemonMove4P2'></span>
+        </div>
+        <button type="button" name="previous" class="P2">Previous</button>
+        <button type="button" name="next" class="P2">Next</button>
+        </div>
+      </div>
+      <button type="button" name="start">Start Battle!</button>
+    </section>
+
+    <div class='battleIntro hidden'>
+      <img class="battleIntrologo" src="./css/images/CODEMON-logo.png" alt="">
+    </div>
+
+    <section class="battle hidden">
+      <div class='battleArea'>
+        <div class='playerScreen' id='player1Screen'>
+          <div class="topHalf">
+            <div class="codemonimagewrapper">
+              <div class="impactAnimationP1 hidden"></div>
+              <div class='codemonImageP2 front hidden'></div>
+            </div>
+          <div class='hpChart hpChartP2'>
+            <span class='codemonNameP2'></span>
+            <div class="p2barChart">
+              <label>HP</label><div class="p2bar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="bottomHalf">
+          <div class='hpChart'>
+            <span class='codemonNameP1'></span>
+            <div class="p1barChart">
+              <label>HP</label><div class="p1bar"></div>
+            </div>
+          </div>
+          <div class="codemonimagewrapper">
+            <div class="impactAnimationP2 hidden"></div>
+            <div class='codemonImageP1 back hidden'></div>
+          </div>
+          <div class='player1Options'>
+            <button type="button" name="attack1">Attack 1</button>
+            <button type="button" name="attack2">Attack 2</button>
+            <button type="button" name="attack3">Attack 3</button>
+            <button type="button" name="attack4">Attack 4</button>
+          </div>
+      </div>
+      </div>
+
+      <div class='playerScreen inactive' id='player2Screen'>
+        <div class="topHalf">
+          <div class="codemonimagewrapper">
+            <div class="impactAnimationP2 hidden"></div>
+              <div class='codemonImageP1 front hidden'></div>
+          </div>
+        <div class='hpChart hpChartP1'>
+          <span class='codemonNameP1'></span>
+          <div class="p1barChart">
+            <label>HP</label><div class="p1bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomHalf">
+        <div class='hpChart'>
+          <span class='codemonNameP2'></span>
+          <div class="p2barChart">
+            <label>HP</label><div class="p2bar"></div>
+          </div>
+        </div>
+          <div class="codemonimagewrapper">
+            <div class="impactAnimationP1 hidden"></div>
+            <div class='codemonImageP2 back hidden'></div>
+          </div>
+        <div class='player2Options'>
+          <button type="button" name="attack1">Attack 1</button>
+          <button type="button" name="attack2">Attack 2</button>
+          <button type="button" name="attack3">Attack 3</button>
+          <button type="button" name="attack4">Attack 4</button>
+        </div>
+    </div>
+      </div>
+
+    </div>
+      <div class="messageBox"></div>
+
+    </section>
+
+    <section class='winner hidden'>
+      <p>Well done <span class='winnerName'></span> you are the winner!</p>
+      <button type="button" name="playAgain">Play Again?</button>
+    </section>
   </body>
 </html>

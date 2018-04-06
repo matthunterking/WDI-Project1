@@ -1,23 +1,418 @@
-/*
-Errno::ENOENT: No such file or directory @ rb_sysopen - scss/style.scss
+.room {
+  width: 45%;
+  height: 557px;
+  position: relative;
+  left: 23%;
+  background-image: url(./images/room.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat; }
 
-Backtrace:
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:454:in `read'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:454:in `update_stylesheet'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `each'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:294:in `watch'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin.rb:109:in `method_missing'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/exec/sass_scss.rb:360:in `watch_or_update'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/exec/sass_scss.rb:51:in `process_result'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/exec/base.rb:52:in `parse'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/exec/base.rb:19:in `parse!'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/bin/sass:13:in `<top (required)>'
-/usr/local/bin/sass:22:in `load'
-/usr/local/bin/sass:22:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Errno::ENOENT: No such file or directory @ rb_sysopen - scss/style.scss"; }
+.altStartPlayer {
+  width: 48px;
+  height: 54px;
+  background-image: url(./images/trainerdown.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 159px;
+  left: 176px; }
+
+.otheralernateplayer {
+  width: 48px;
+  height: 54px;
+  background-image: url(./images/trainerup.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 115px;
+  left: 4px; }
+
+.altmessagebox {
+  border: 2px solid black; }
+
+.startLogo {
+  width: 50%;
+  display: block;
+  margin: 50px auto; }
+
+form {
+  position: relative;
+  height: 260px;
+  top: 50px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row; }
+
+.playerNameInput {
+  display: inline-block;
+  width: 40%;
+  font-size: 20px;
+  text-align: center; }
+
+input {
+  width: 80%;
+  height: 50px;
+  margin: 30px;
+  text-align: center;
+  font-size: 20px; }
+
+.characterselection {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  text-align: center;
+  font-size: 20px; }
+
+.codemonSelection {
+  width: 50%;
+  border: 2px solid black; }
+
+.codemonWrapper {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column; }
+
+.selectionScreenName {
+  margin: 10px;
+  width: 100%; }
+
+.codemonImageP2 {
+  width: 100%;
+  height: 300px; }
+
+.codemonImageP1 {
+  width: 100%;
+  height: 300px; }
+
+.codemonStats {
+  width: 100%;
+  height: 200px;
+  padding: 10px; }
+
+section.battle {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column; }
+
+.battleArea {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: row; }
+
+.playerScreen {
+  width: 50%;
+  height: 550px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background: url(./images/battle-background.png);
+  background-size: cover;
+  background-position: -176px;
+  background-repeat: no-repeat; }
+
+.inactive {
+  opacity: 0.45; }
+
+.topHalf {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px; }
+
+.bottomHalf {
+  width: 100%;
+  height: 330px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.hpChart {
+  width: 48%;
+  height: 100px;
+  border: 2px solid black;
+  margin: 10px 0;
+  background-color: silver; }
+
+.front {
+  height: 170px;
+  background-size: contain; }
+
+.back {
+  height: 200px;
+  background-size: contain; }
+
+.player1Options {
+  display: flex;
+  flex-wrap: wrap; }
+
+.player2Options {
+  display: flex;
+  flex-wrap: wrap; }
+
+.messageBox {
+  width: 100%;
+  height: 143px;
+  text-align: center;
+  line-height: 30px;
+  background-color: white; }
+
+.p1barChart {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px; }
+
+.p1bar {
+  width: 100%;
+  height: 15px;
+  background-color: green;
+  transition-property: width;
+  transition-duration: 2s; }
+
+.p2barChart {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px; }
+
+.p2bar {
+  width: 100%;
+  height: 15px;
+  background-color: green;
+  transition-property: width;
+  transition-duration: 2s; }
+
+.impactAnimationP1 {
+  background-image: url(./images/pow.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  margin: 30px 50px;
+  width: 100px;
+  height: 100px; }
+
+.impactAnimationP2 {
+  background-image: url(./images/pow.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  margin: 30px 50px;
+  width: 100px;
+  height: 100px; }
+
+.codemonimagewrapper {
+  width: 46%; }
+
+.winner {
+  background-image: url(./images/endgame.jpg);
+  background-position: center;
+  text-align: center; }
+  .winner p {
+    color: white;
+    position: relative;
+    top: 40%; }
+
+body {
+  box-sizing: border-box;
+  background: url(./images/background.jpg);
+  background: contain;
+  background-position: center; }
+
+.logo {
+  width: 20%;
+  position: relative;
+  left: 40%;
+  margin: 10px 0; }
+
+section {
+  width: 70%;
+  height: 700px;
+  border: 2px solid black;
+  margin: 0 auto;
+  background-color: #FAE7FB; }
+
+section.hidden {
+  display: none; }
+
+.hidden {
+  display: none; }
+
+.startAnimationBox {
+  position: relative;
+  width: 20%;
+  height: 200px;
+  left: 40%;
+  display: inline-block;
+  animation: openingscreen 12s infinite;
+  animation-timing-function: steps(1, end); }
+
+@keyframes openingscreen {
+  0% {
+    background: url(./images/HTMel-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  20% {
+    background: url(./images/Yavascript-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  40% {
+    background: url(./images/CSS-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  60% {
+    background: url(./images/HTMel-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  80% {
+    background: url(./images/Yavascript-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; }
+  100% {
+    background: url(./images/CSS-front.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat; } }
+.battleIntro {
+  width: 70%;
+  left: 15%;
+  height: 700px;
+  background-color: black;
+  position: relative;
+  z-index: 5; }
+
+.battleIntrologo {
+  width: 50%;
+  position: relative;
+  left: 25%;
+  top: 30%;
+  animation: spin;
+  animation-duration: 5s;
+  animation-iteration-count: 5;
+  transition-timing-function: ease-in; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(1800deg); } }
+.screencolor {
+  height: 20px;
+  width: 30px;
+  background-color: skyblue;
+  position: relative;
+  top: 17px;
+  left: 15px;
+  animation: flash;
+  animation-duration: 3s;
+  animation-iteration-count: infinite; }
+
+@keyframes flash {
+  0% {
+    background-color: skyblue; }
+  25% {
+    background-color: #FFB400; }
+  50% {
+    background-color: #D73F47; }
+  75% {
+    background-color: #25B702; }
+  100% {
+    background-color: skyblue; } }
+button {
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  border: double;
+  font-size: 15px;
+  font-family: "IBM Plex Mono", monospace; }
+
+#startGame {
+  background-color: #25B702;
+  color: black;
+  margin: 30px; }
+
+#computerPlayer {
+  background-color: #EA9800;
+  width: 250px;
+  position: relative;
+  bottom: 25px; }
+
+button[name="start"] {
+  background-color: #D73F47;
+  position: absolute;
+  top: 700px;
+  width: 200px; }
+
+button[name="next"] {
+  background-color: #018ECC; }
+
+button[name="previous"] {
+  background-color: #018ECC; }
+
+button[name="attack1"] {
+  background-color: #D73F47;
+  width: 40%;
+  margin: 5px 5%; }
+
+button[name="attack2"] {
+  background-color: #EA9800;
+  width: 40%;
+  margin: 5px 5%; }
+
+button[name="attack3"] {
+  background-color: #25B702;
+  width: 40%;
+  margin: 5px 5%; }
+
+button[name="attack4"] {
+  background-color: #018ECC;
+  width: 40%;
+  margin: 5px 5%; }
+
+button[name="playAgain"] {
+  background-color: white;
+  position: absolute;
+  top: 80%;
+  left: 46%; }
+
+button.inactiveButtons {
+  background-color: white; }
+
+body {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 30px; }
+
+.codemonNameP1 {
+  font-weight: bolder;
+  font-size: 34px; }
+
+.codemonNameP2 {
+  font-weight: bolder;
+  font-size: 34px; }
+
+p {
+  padding: 10px; }
+
+label {
+  width: 10%;
+  height: 20px;
+  padding: 2px;
+  font-size: 15px;
+  color: #FFB400;
+  background-color: black;
+  display: inline-block; }
+
+/*# sourceMappingURL=style.css.map */
