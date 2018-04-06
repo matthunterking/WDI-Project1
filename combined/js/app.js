@@ -224,7 +224,6 @@ $(function(){
     $('.player1Name').text(p1.name); //populates all future instances of player name with values
     $('.player2Name').text(p2.name);
     computerPlayer ? computerPlayerFormatting() : ''; //function to change the formating of the pages to 1 player mode if playing the computer
-    console.log(`Start game player turn is now ${playerturn}`);
   });
 
   $('#computerPlayer').on('click', function(){
@@ -240,7 +239,6 @@ $(function(){
   const checkFor2Players = function(p1, p2) {
     if (p1 && p2) {
       $('.startPage').addClass('hidden');
-      console.log($('.startPage'));
       $('.characterselection').removeClass('hidden');
     } else {
       alert('Please enter a name for both player 1 and player 2');
@@ -376,7 +374,6 @@ $(function(){
 
   const disableButtons = function() {
     $('.player1Options button, .player2Options button').off('click');
-    console.log('disabled buttons');
   };
 
   //------------------------ BATTLE INTRO SECTION -------------------------------
@@ -391,7 +388,6 @@ $(function(){
   const battleIntroStage1 = function() {
     $('.battleIntro').addClass('hidden');
     $('.battle').removeClass('hidden');
-    console.log($('.startPage'));
   };
 
   const battleIntroStage2 = function() {
@@ -401,7 +397,6 @@ $(function(){
     $messageDisplay.text(`${p1.name} sent out ${p1.chosen.name}`);
     $('.additionalSound').attr('src', `${p1.chosen.sound}`);
     $('.additionalSound').prop('autoplay', true);
-    console.log($('.startPage'));
   };
 
   const battleIntroStage3 = function() {
@@ -625,7 +620,6 @@ $(function(){
     computerPlayer ? computerPlayerCssReset() : '';
     playerAndStatsReset();
     cssReset();
-    console.log(`Game over player turn is now ${playerturn}`);
   });
 
   const playerAndStatsReset = function() {
