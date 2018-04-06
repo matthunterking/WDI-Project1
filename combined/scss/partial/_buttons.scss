@@ -28,28 +28,28 @@ button[name="start"] {
   width: 200px;
 }
 
-button[name="next"] {
-  background-color: $blue;
-}
-button[name="previous"] {
-  background-color: $blue;
-}
+button[name="next"] {background-color: $blue}
+
+button[name="previous"] {background-color: $blue}
 
 button[name="attack1"] {
   background-color: $red;
   width: 40%;
   margin: 5px 5%;
 }
+
 button[name="attack2"] {
     background-color: $orange;
   width: 40%;
   margin: 5px 5%;
 }
+
 button[name="attack3"] {
   background-color: $green;
   width: 40%;
   margin: 5px 5%;
 }
+
 button[name="attack4"] {
   background-color: $blue;
   width: 40%;
@@ -63,7 +63,4 @@ button[name="playAgain"] {
   left: 46%;
 }
 
-
-button.inactiveButtons {
-  background-color: white;
-}
+button.inactiveButtons {background-color: white}

@@ -8,7 +8,7 @@
 
 .codemonSelection {
   width: 50%;
-  border: 2px solid black;
+  border: $border;
 }
 
 .codemonWrapper {
@@ -38,9 +38,4 @@
   width: 100%;
   height: 200px;
   padding: 10px;
-}
-
-.yavaScript {
-  background-image: url('http://guidesmedia.ign.com/guides/059687/images/blackwhite/pokemans_026.gif');
-  background-size: cover;
 }

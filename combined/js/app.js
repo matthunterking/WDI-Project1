@@ -119,7 +119,7 @@ $(function(){
       $('.altmessagebox').text(`There's no time to play the N64 I should talk to my friend`);
     }
     if(leftposition > 348 && topposition < 111) {
-      $('.altmessagebox').text(`Don't leave! Come and see what I'm playing on the computer!`);
+      $('.altmessagebox').text(`Hey! Don't leave! Come and see what I'm playing on the computer!`);
     }
     if ((leftposition < 60 && topposition > 63 && topposition < 115) || (leftposition < 40 && topposition < 115)) {
       $('.mainAudio').attr('src', './sounds/startpage.mp3');

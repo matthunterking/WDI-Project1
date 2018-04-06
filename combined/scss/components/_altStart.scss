@@ -31,36 +31,4 @@
   left: 4px;
 }
 
-.altmessagebox {
-  border: 2px solid black;
-}
-
-.screencolor {
-  height: 20px;
-  width: 30px;
-  background-color: skyblue;
-  position: relative;
-  top: 17px;
-  left: 15px;
-  animation: flash;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes flash {
-  0% {
-    background-color: skyblue;
-  }
-  25% {
-    background-color: $yellow;
-  }
-  50% {
-    background-color: $red;
-  }
-  75% {
-    background-color: $green;
-  }
-  100% {
-    background-color: skyblue;
-  }
-}
+.altmessagebox {border: $border}

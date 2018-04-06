@@ -15,17 +15,13 @@ body {
 section {
   width: 70%;
   height: 700px;
-  border: 2px solid black;
+  border: $border;
   margin: 0 auto;
-  background-color: rgb(250, 231, 251);
+  background-color: $backgroundcolor;
 }
 
 section {
-  &.hidden {
-    display: none;
-  }
+  &.hidden {display: none}
 }
 
-.hidden {
-  display: none;
-}
+.hidden {display: none}
