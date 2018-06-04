@@ -22,7 +22,7 @@ $(function(){
   let t14;
   let t15;
   let t16;
-  let t17;
+  let t17; 
   let t18;
   let t19;
   let t20;
