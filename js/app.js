@@ -83,7 +83,7 @@ $(function(){
     }
   }
 
-  const yavaScript = new Codemon('YavaScript', 6, 4, move4, move6, move3, move2, 'YavaScript-front.png', 'YavaScript-back.png', './sounds/yava.wav');
+  const yavaScript = new Codemon('YavaScript', 6, 4, move4, move6, move3, move2, 'yavaScriptFront.png', 'yavaScriptBack.png', './sounds/yavaScrptSound.wav');
   const htmMel = new Codemon('HTM-Mel', 2, 8, move7, move3, move2, move1, 'HTMel-front.png', 'HTMel-back.png', './sounds/htmel.wav');
   const cssMess = new Codemon('CS-Mess', 8, 2, move5, move2, move3, move4, 'CSS-front.png', 'CSS-back.png', './sounds/csmess.wav');
 
