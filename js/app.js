@@ -60,13 +60,13 @@ $(function(){
     }
   }
 
-  const move1 = new Move('Code Smash',0,0,20,5, 'A powerful code attack with a small attack range', 'moveCodeSmash.png', './sounds/moveSmash.wav');
-  const move2 = new Move('Delete the Semicolon',0,2,0,0,'Decrases the defence of your opponant', 'moveSemi.png', './sounds/moveSemi.wav');
-  const move3 = new Move('Install jQuery',2,0,0,0,'Increases your attack','moveInstall.png', './sounds/moveInstall.wav');
-  const move4 = new Move('All the Brackets',0,0,10,15,'Throws <{]{][>]}} at your opponant. Has a high attack range', 'moveBrackets.png', './sounds/moveBrackets.wav');
-  const move5 = new Move('Rainbow Puke',0,0,15,10,'A barrage of additional colors for no reason. Has a meduim attack range', 'moveRainbow.png', './sounds/moveRainbow.wav');
-  const move6 = new Move('Return Undefined',0,0,25,0,'Returns undefined to your opponant', 'moveUndefined.png', './sounds/moveUndefined.wav');
-  const move7 = new Move('404 Not Found',0,0,20,7,'Throws an incompleted site at your opponant. Has a meduim attack range', 'move404.png', './sounds/move404.wav');
+  const move1 = new Move('Code Smash',0,0,20,5, 'A powerful code attack with a small attack range', 'move-CodeSmash.png', './sounds/moveSmash.wav');
+  const move2 = new Move('Delete the Semicolon',0,2,0,0,'Decrases the defence of your opponant', 'move-Semi.png', './sounds/moveSemi.wav');
+  const move3 = new Move('Install jQuery',2,0,0,0,'Increases your attack','move-Install.png', './sounds/moveInstall.wav');
+  const move4 = new Move('All the Brackets',0,0,10,15,'Throws <{]{][>]}} at your opponant. Has a high attack range', 'move-Brackets.png', './sounds/moveBrackets.wav');
+  const move5 = new Move('Rainbow Puke',0,0,15,10,'A barrage of additional colors for no reason. Has a meduim attack range', 'move-Rainbow.png', './sounds/moveRainbow.wav');
+  const move6 = new Move('Return Undefined',0,0,25,0,'Returns undefined to your opponant', 'move-Undefined.png', './sounds/moveUndefined.wav');
+  const move7 = new Move('404 Not Found',0,0,20,7,'Throws an incompleted site at your opponant. Has a meduim attack range', 'move-404.png', './sounds/move404.wav');
 
   class Codemon {
     constructor(name, attack, defence, m1, m2, m3, m4, frontImage, backImage, sound) {
@@ -83,9 +83,9 @@ $(function(){
     }
   }
 
-  const yavaScript = new Codemon('YavaScript', 6, 4, move4, move6, move3, move2, 'codemonYavascriptFront.png', 'codemonYavascriptBack.png', './sounds/entranceYavaScript.wav');
-  const htmMel = new Codemon('HTM-Mel', 2, 8, move7, move3, move2, move1, 'codemonHtmelFront.png', 'codemonHtmelBack.png', './sounds/entranceHtmel.wav');
-  const cssMess = new Codemon('CS-Mess', 8, 2, move5, move2, move3, move4, 'codemonCsmessFront.png', 'codemonCsmessBack.png', './sounds/entranceCsmess.wav');
+  const yavaScript = new Codemon('YavaScript', 6, 4, move4, move6, move3, move2, 'codemon-Yavascript-Front.png', 'codemon-Yavascript-Back.png', './sounds/entranceYavaScript.wav');
+  const htmMel = new Codemon('HTM-Mel', 2, 8, move7, move3, move2, move1, 'codemon-Htmel-Front.png', 'codemon-Htmel-Back.png', './sounds/entranceHtmel.wav');
+  const cssMess = new Codemon('CS-Mess', 8, 2, move5, move2, move3, move4, 'codemon-Csmess-Front.png', 'codemon-Csmess-Back.png', './sounds/entranceCsmess.wav');
 
   class player {
     constructor(name, attack, defence, hp, chosen) {
