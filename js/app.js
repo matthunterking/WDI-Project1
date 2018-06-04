@@ -60,13 +60,13 @@ $(function(){
     }
   }
 
-  const move1 = new Move('Code Smash',0,0,20,5, 'A powerful code attack with a small attack range', 'pow.png', './sounds/smash.wav');
-  const move2 = new Move('Delete the Semicolon',0,2,0,0,'Decrases the defence of your opponant', 'download.png', './sounds/semi.wav');
-  const move3 = new Move('Install jQuery',2,0,0,0,'Increases your attack','upload.png', './sounds/install.wav');
-  const move4 = new Move('All the Brackets',0,0,10,15,'Throws <{]{][>]}} at your opponant. Has a high attack range', 'brackets.png', './sounds/brackets.wav');
-  const move5 = new Move('Rainbow Puke',0,0,15,10,'A barrage of additional colors for no reason. Has a meduim attack range', 'rainbow.png', './sounds/rainbow.wav');
-  const move6 = new Move('Return Undefined',0,0,25,0,'Returns undefined to your opponant', 'undefined.png', './sounds/undefined.wav');
-  const move7 = new Move('404 Not Found',0,0,20,7,'Throws an incompleted site at your opponant. Has a meduim attack range', '404.png', './sounds/404.wav');
+  const move1 = new Move('Code Smash',0,0,20,5, 'A powerful code attack with a small attack range', 'pow.png', './sounds/moveSmash.wav');
+  const move2 = new Move('Delete the Semicolon',0,2,0,0,'Decrases the defence of your opponant', 'download.png', './sounds/moveSemi.wav');
+  const move3 = new Move('Install jQuery',2,0,0,0,'Increases your attack','upload.png', './sounds/moveInstall.wav');
+  const move4 = new Move('All the Brackets',0,0,10,15,'Throws <{]{][>]}} at your opponant. Has a high attack range', 'brackets.png', './sounds/moveBrackets.wav');
+  const move5 = new Move('Rainbow Puke',0,0,15,10,'A barrage of additional colors for no reason. Has a meduim attack range', 'rainbow.png', './sounds/moveRainbow.wav');
+  const move6 = new Move('Return Undefined',0,0,25,0,'Returns undefined to your opponant', 'undefined.png', './sounds/moveUndefined.wav');
+  const move7 = new Move('404 Not Found',0,0,20,7,'Throws an incompleted site at your opponant. Has a meduim attack range', '404.png', './sounds/move404.wav');
 
   class Codemon {
     constructor(name, attack, defence, m1, m2, m3, m4, frontImage, backImage, sound) {
