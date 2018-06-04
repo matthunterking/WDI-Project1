@@ -122,7 +122,7 @@ $(function(){
       $('.altmessagebox').text('Hey! Don\'t leave! Come and see what I\'m playing on the computer!');
     }
     if ((leftposition < 60 && topposition > 63 && topposition < 115) || (leftposition < 40 && topposition < 115)) {
-      $('.mainAudio').attr('src', './sounds/backgroundScreen3.mp3');
+      $('.mainAudio').attr('src', './sounds/backgroundScreen2.mp3');
       $('.screencolor').removeClass('hidden');
       $('.altmessagebox').text('Check it out I\'m playing this cool new game by the Web Developer Matt Hunter-King');
       t18 = setTimeout(function(){
