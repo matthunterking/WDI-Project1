@@ -22,7 +22,7 @@ $(function(){
   let t14;
   let t15;
   let t16;
-  let t17; 
+  let t17;
   let t18;
   let t19;
   let t20;
@@ -83,9 +83,9 @@ $(function(){
     }
   }
 
-  const yavaScript = new Codemon('YavaScript', 6, 4, move4, move6, move3, move2, 'codemonYavaScriptFront.png', 'codemonYavaScriptBack.png', './sounds/entranceYavaScript.wav');
-  const htmMel = new Codemon('HTM-Mel', 2, 8, move7, move3, move2, move1, 'codemonHTMelFront.png', 'codemonHTMelBack.png', './sounds/entranceHtmel.wav');
-  const cssMess = new Codemon('CS-Mess', 8, 2, move5, move2, move3, move4, 'codemonCSmessFront.png', 'codemonCSmessBack.png', './sounds/entranceCsmess.wav');
+  const yavaScript = new Codemon('YavaScript', 6, 4, move4, move6, move3, move2, 'codemonYavascriptFront.png', 'codemonYavascriptBack.png', './sounds/entranceYavaScript.wav');
+  const htmMel = new Codemon('HTM-Mel', 2, 8, move7, move3, move2, move1, 'codemonHtmelFront.png', 'codemonHtmelBack.png', './sounds/entranceHtmel.wav');
+  const cssMess = new Codemon('CS-Mess', 8, 2, move5, move2, move3, move4, 'codemonCsmessFront.png', 'codemonCsmessBack.png', './sounds/entranceCsmess.wav');
 
   class player {
     constructor(name, attack, defence, hp, chosen) {
