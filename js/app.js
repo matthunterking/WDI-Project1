@@ -122,7 +122,7 @@ $(function(){
       $('.altmessagebox').text('Hey! Don\'t leave! Come and see what I\'m playing on the computer!');
     }
     if ((leftposition < 60 && topposition > 63 && topposition < 115) || (leftposition < 40 && topposition < 115)) {
-      $('.mainAudio').attr('src', './sounds/startpage.mp3');
+      $('.mainAudio').attr('src', './sounds/backgroundScreen3.mp3');
       $('.screencolor').removeClass('hidden');
       $('.altmessagebox').text('Check it out I\'m playing this cool new game by the Web Developer Matt Hunter-King');
       t18 = setTimeout(function(){
@@ -322,7 +322,7 @@ $(function(){
     computerPlayer ? computerSetUp() : '';
     $('.characterselection').addClass('hidden');
     $('.battleIntro').removeClass('hidden');
-    $('audio').attr('src', './sounds/battleScreen.mp3');
+    $('audio').attr('src', './sounds/backgroundScreen4.mp3');
     $('.startPage').addClass('hidden');
     battleScreenFormatting();
     const movesP1 = [p1.chosen.m1, p1.chosen.m2, p1.chosen.m3, p1.chosen.m4];
@@ -597,7 +597,7 @@ $(function(){
         $('.battle').addClass('hidden');
         $('.winner').removeClass('hidden');
         $('.winnerName').text(`${attackingPlayer.name}`);
-        $('.mainAudio').attr('src', './sounds/endgame.mp3');
+        $('.mainAudio').attr('src', './sounds/backgroundScreen5.mp3');
       }, (delayTimer * 5));
     } else {
       return;
@@ -616,7 +616,7 @@ $(function(){
     clearTimeout(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17);
     $('.winner').addClass('hidden');
     $('.startPage').removeClass('hidden');
-    $('.mainAudio').attr('src', './sounds/backgroundScreen2.mp3');
+    $('.mainAudio').attr('src', './sounds/backgroundScreen3.mp3');
     computerPlayer ? computerPlayerCssReset() : '';
     playerAndStatsReset();
     cssReset();
