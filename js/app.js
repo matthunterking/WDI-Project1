@@ -83,7 +83,7 @@ $(function(){
     }
   }
 
-  const yavaScript = new Codemon('YavaScript', 6, 4, move4, move6, move3, move2, 'YavaScript-front.png', 'YavaScript-back.png', './sounds/yava.wav');
+  const yavaScript = new Codemon('YavaScript', 6, 4, move4, move6, move3, move2, 'yavaScriptFront.png', 'yavaScriptBack.png', './sounds/yavaScrptSound.wav');
   const htmMel = new Codemon('HTM-Mel', 2, 8, move7, move3, move2, move1, 'HTMel-front.png', 'HTMel-back.png', './sounds/htmel.wav');
   const cssMess = new Codemon('CS-Mess', 8, 2, move5, move2, move3, move4, 'CSS-front.png', 'CSS-back.png', './sounds/csmess.wav');
 
@@ -116,17 +116,17 @@ $(function(){
 
   const altmessages = function() {
     if (leftposition > 144 && leftposition < 212 && topposition > 330 && topposition < 335) {
-      $('.altmessagebox').text(`There's no time to play the N64 I should talk to my friend`);
+      $('.altmessagebox').text('There\'s no time to play the N64 I should talk to my friend');
     }
     if(leftposition > 348 && topposition < 111) {
-      $('.altmessagebox').text(`Hey! Don't leave! Come and see what I'm playing on the computer!`);
+      $('.altmessagebox').text('Hey! Don\'t leave! Come and see what I\'m playing on the computer!');
     }
     if ((leftposition < 60 && topposition > 63 && topposition < 115) || (leftposition < 40 && topposition < 115)) {
       $('.mainAudio').attr('src', './sounds/startpage.mp3');
       $('.screencolor').removeClass('hidden');
-      $('.altmessagebox').text(`Check it out I'm playing this cool new game by the Web Developer Matt Hunter-King`);
+      $('.altmessagebox').text('Check it out I\'m playing this cool new game by the Web Developer Matt Hunter-King');
       t18 = setTimeout(function(){
-        $('.altmessagebox').text(`It's very cool, it's like pokemon but with code. Lets play!`);
+        $('.altmessagebox').text('It\'s very cool, it\'s like pokemon but with code. Lets play!');
       }, 6000);
       t19 = setTimeout(function(){
         $('.alternateStart').addClass('hidden');
@@ -535,8 +535,8 @@ $(function(){
       result = 0;
       return result;
     } else {
-      let defencefactor = (attack-defence);
-      let calRange = (Math.floor(Math.random()*range)+1);
+      const defencefactor = (attack-defence);
+      const calRange = (Math.floor(Math.random()*range)+1);
       result = basePower + defencefactor + calRange;
       return result;
     }
