@@ -106,39 +106,39 @@ $(function(){
 
   let keyPressed;
 
-  const moveDistance = 4;
+  const moveDistance = 1;
 
-  let leftposition = 176;
+  let leftposition = 37;
 
-  let topposition = 159;
+  let topposition = 30;
 
   let step = 0;
 
-  const altmessages = function() {
-    if (leftposition > 144 && leftposition < 212 && topposition > 330 && topposition < 335) {
-      $('.altmessagebox').text('There\'s no time to play the N64 I should talk to my friend');
-    }
-    if(leftposition > 348 && topposition < 111) {
-      $('.altmessagebox').text('Hey! Don\'t leave! Come and see what I\'m playing on the computer!');
-    }
-    if ((leftposition < 60 && topposition > 63 && topposition < 115) || (leftposition < 40 && topposition < 115)) {
-      $('.mainAudio').attr('src', './sounds/backgroundScreen2.mp3');
-      $('.screencolor').removeClass('hidden');
-      $('.altmessagebox').text('Check it out I\'m playing this cool new game by the Web Developer Matt Hunter-King');
-      t18 = setTimeout(function(){
-        $('.altmessagebox').text('It\'s very cool, it\'s like pokemon but with code. Lets play!');
-      }, 6000);
-      t19 = setTimeout(function(){
-        $('.alternateStart').addClass('hidden');
-        $('.startPage').removeClass('hidden');
-        $('.screencolor').addClass('hidden');
-      }, 13000);
-      $(window).off('keyup keydown keypress');
-    }
-  };
+  // const altmessages = function() {
+  //   if (leftposition > 23 && leftposition < 34 && topposition > 23 && topposition < 34) {
+  //     $('.altmessagebox').text('There\'s no time to play the N64 I should talk to my friend');
+  //   }
+  //   if(leftposition > 348 && topposition < 111) {
+  //     $('.altmessagebox').text('Hey! Don\'t leave! Come and see what I\'m playing on the computer!');
+  //   }
+  //   if ((leftposition < 60 && topposition > 63 && topposition < 115) || (leftposition < 40 && topposition < 115)) {
+  //     $('.mainAudio').attr('src', './sounds/backgroundScreen2.mp3');
+  //     $('.screencolor').removeClass('hidden');
+  //     $('.altmessagebox').text('Check it out I\'m playing this cool new game by the Web Developer Matt Hunter-King');
+  //     t18 = setTimeout(function(){
+  //       $('.altmessagebox').text('It\'s very cool, it\'s like pokemon but with code. Lets play!');
+  //     }, 6000);
+  //     t19 = setTimeout(function(){
+  //       $('.alternateStart').addClass('hidden');
+  //       $('.startPage').removeClass('hidden');
+  //       $('.screencolor').addClass('hidden');
+  //     }, 13000);
+  //     $(window).off('keyup keydown keypress');
+  //   }
+  // };
 
   $(window).keydown(function(e) {
-    keyPressed=e.which;
+    keyPressed = e.which;
     arrowKeys(keyPressed);
   });
   $(window).keyup(function() {
@@ -172,13 +172,13 @@ $(function(){
     switch (keyPressed) {
       case 37: //left
         if ((leftposition > 0)
-        && !(leftposition > 0 && leftposition < 52 && topposition > 283 && topposition < 380)
-      && !(leftposition > -1 && leftposition < 165 && topposition > 18 && topposition < 60)
-      && !(leftposition > 120 && leftposition < 220 && topposition > 168 && topposition < 330)
-      && !(leftposition > 293 && leftposition < 393 && topposition > 293 && topposition < 380)
+        && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
+      && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
+      && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
+      && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
         ) {
           leftposition -= moveDistance;
-          $player.css('left', `${leftposition.toString()}px`);
+          $player.css('left', `${leftposition.toString()}%`);
         }
         walk('left');
         break;
@@ -187,17 +187,17 @@ $(function(){
         && !(leftposition > -1 && leftposition < 165 && topposition > 18 && topposition < 64)
       && !(leftposition > 120 && leftposition < 210 && topposition > 168 && topposition < 335)) {
           topposition -= moveDistance;
-          $player.css('top', `${topposition.toString()}px`);
+          $player.css('top', `${topposition.toString()}%`);
         }
         walk('up');
         break;
       case 39: //right
-        if (leftposition < 404
-        && !(leftposition > 118 && leftposition < 210 && topposition > 168 && topposition < 330)
-        && !(leftposition > 290 && leftposition < 392 && topposition > 293 && topposition < 380)
+        if (leftposition < 90
+        && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
+        && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
         ) {
           leftposition += moveDistance;
-          $player.css('left', `${leftposition.toString()}px`);
+          $player.css('left', `${leftposition.toString()}%`);
         }
         walk('right');
         break;
@@ -208,7 +208,7 @@ $(function(){
       && !(leftposition > 293 && leftposition < 392 && topposition > 287 && topposition < 380)
         ) {
           topposition += moveDistance;
-          $player.css('top', `${topposition.toString()}px`);
+          $player.css('top', `${topposition.toString()}%`);
         }
         walk('down');
         break;
@@ -613,7 +613,7 @@ $(function(){
   };
 
   $('.winner button[name="playAgain"]').on('click', function(){
-    clearTimeout(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17);
+    clearTimeout(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20);
     $('.winner').addClass('hidden');
     $('.startPage').removeClass('hidden');
     $('.mainAudio').attr('src', './sounds/backgroundScreen3.mp3');
