@@ -1,22 +1,28 @@
+.alternateStart {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center; }
+
 .room {
-  width: 45%;
-  height: 557px;
+  width: 500px;
+  height: 500px;
+  border: 2px solid red;
   position: relative;
-  left: 23%;
   background-image: url(./images/room.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat; }
 
 .altStartPlayer {
-  width: 10%;
-  min-height: 54px;
+  width: 50px;
+  height: 57px;
   background-image: url(./images/trainerdown.png);
   background-size: 100%;
   background-repeat: no-repeat;
   position: relative;
-  top: 30%;
-  left: 37%; }
+  top: 120px;
+  left: 200px; }
 
 .otheralernateplayer {
   width: 48px;
@@ -314,8 +320,8 @@ section.hidden {
   width: 30px;
   background-color: skyblue;
   position: relative;
-  top: 17px;
-  left: 15px;
+  top: -31px;
+  left: 18px;
   animation: flash;
   animation-duration: 3s;
   animation-iteration-count: infinite; }

@@ -1,5 +1,7 @@
 $(function(){
 
+  // Notes with ** in front were made after the course
+
 //----------------------------- VARIABLES --------------------------------------
   let computerPlayer = false; //Toggle if player 2 is the computer
   let hit = true; //Stores if the attack hits or not
@@ -26,6 +28,8 @@ $(function(){
   let t18;
   let t19;
   let t20;
+
+  // ** I would make this 1 time out now and clear it after each timeout event
 
 
   //-------------------------- SELECTORS ---------------------------------------
@@ -106,36 +110,36 @@ $(function(){
 
   let keyPressed;
 
-  const moveDistance = 1;
+  const moveDistance = 4;
 
-  let leftposition = 37;
+  let leftposition = 200;
 
-  let topposition = 30;
+  let topposition = 100;
 
   let step = 0;
 
-  // const altmessages = function() {
-  //   if (leftposition > 23 && leftposition < 34 && topposition > 23 && topposition < 34) {
-  //     $('.altmessagebox').text('There\'s no time to play the N64 I should talk to my friend');
-  //   }
-  //   if(leftposition > 348 && topposition < 111) {
-  //     $('.altmessagebox').text('Hey! Don\'t leave! Come and see what I\'m playing on the computer!');
-  //   }
-  //   if ((leftposition < 60 && topposition > 63 && topposition < 115) || (leftposition < 40 && topposition < 115)) {
-  //     $('.mainAudio').attr('src', './sounds/backgroundScreen2.mp3');
-  //     $('.screencolor').removeClass('hidden');
-  //     $('.altmessagebox').text('Check it out I\'m playing this cool new game by the Web Developer Matt Hunter-King');
-  //     t18 = setTimeout(function(){
-  //       $('.altmessagebox').text('It\'s very cool, it\'s like pokemon but with code. Lets play!');
-  //     }, 6000);
-  //     t19 = setTimeout(function(){
-  //       $('.alternateStart').addClass('hidden');
-  //       $('.startPage').removeClass('hidden');
-  //       $('.screencolor').addClass('hidden');
-  //     }, 13000);
-  //     $(window).off('keyup keydown keypress');
-  //   }
-  // };
+  const altmessages = function() {
+    if (leftposition > 140 && leftposition < 250 && topposition > 270 && topposition < 340) {
+      $('.altmessagebox').text('There\'s no time to play the N64 I should talk to my friend');
+    }
+    if(leftposition > 380 && topposition < 72) {
+      $('.altmessagebox').text('Hey! Don\'t leave! Come and see what I\'m playing on the computer!');
+    }
+    if (leftposition < 48 && topposition < 120 || leftposition <56 && topposition < 104) {
+      $('.mainAudio').attr('src', './sounds/backgroundScreen2.mp3');
+      $('.screencolor').removeClass('hidden');
+      $('.altmessagebox').text('Check it out I\'m playing this cool new game by the Web Developer Matt Hunter-King');
+      t18 = setTimeout(function(){
+        $('.altmessagebox').text('It\'s very cool, it\'s like pokemon but with code. Lets play!');
+      }, 6000);
+      t19 = setTimeout(function(){
+        $('.alternateStart').addClass('hidden');
+        $('.startPage').removeClass('hidden');
+        $('.screencolor').addClass('hidden');
+      }, 13000);
+      $(window).off('keyup keydown keypress');
+    }
+  };
 
   $(window).keydown(function(e) {
     keyPressed = e.which;
@@ -168,47 +172,65 @@ $(function(){
     }
   };
 
+  const barriers = [
+    { name: 'leftwall', left: 0, right: 1, top: 0, bottom: 500 },
+    { name: 'rightwall', left: 499, right: 500, top: 0, bottom: 500 },
+    { name: 'topwall', left: 0, right: 500, top: -113, bottom: -65 },
+    { name: 'bottomwall', left: 0, right: 500, top: 388, bottom: 390 },
+    { name: 'tv', left: 184, right: 248, top: 140, bottom: 264 },
+    { name: 'bed', left: 0, right: 64, top: 260, bottom: 390 },
+    { name: 'plant', left: 370, right: 438, top: 260, bottom: 390 },
+    { name: 'table', left: 0, right: 188, top: -65, bottom: 11 }
+  ];
+
+  let direction;
+
+  function canMove(leftposition, topposition) {
+    const player = {
+      left: leftposition,
+      right: leftposition + 50,
+      top: topposition - 57,
+      bottom: topposition
+    };
+    return !barriers.some(item => {
+      return player.left < item.right
+      && player.right > item.left
+      && player.bottom > item.top
+      && player.top < item.bottom;
+    });
+  }
+
   const arrowKeys = function(keyPressed) {
     switch (keyPressed) {
       case 37: //left
-        if ((leftposition > 0)
-        && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
-      && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
-      && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
-      && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
-        ) {
-          leftposition -= moveDistance;
-          $player.css('left', `${leftposition.toString()}%`);
+        direction = 'left';
+        leftposition -= moveDistance;
+        if (canMove(leftposition, topposition, direction)) {
+          $player.css('left', `${leftposition.toString()}px`);
         }
         walk('left');
         break;
       case 38: //up
-        if (topposition > 19
-        && !(leftposition > -1 && leftposition < 165 && topposition > 18 && topposition < 64)
-      && !(leftposition > 120 && leftposition < 210 && topposition > 168 && topposition < 335)) {
-          topposition -= moveDistance;
-          $player.css('top', `${topposition.toString()}%`);
+        direction = 'up';
+        topposition -= moveDistance;
+        if (canMove(leftposition, topposition, direction)) {
+          $player.css('top', `${topposition.toString()}px`);
         }
         walk('up');
         break;
       case 39: //right
-        if (leftposition < 90
-        && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
-        && !(leftposition > 0 && leftposition < 0 && topposition > 0 && topposition < 0)
-        ) {
-          leftposition += moveDistance;
-          $player.css('left', `${leftposition.toString()}%`);
+        direction = 'right';
+        leftposition += moveDistance;
+        if (canMove(leftposition, topposition, direction)) {
+          $player.css('left', `${leftposition.toString()}px`);
         }
         walk('right');
         break;
       case 40: //down
-        if (topposition < 377 &&
-          !(leftposition > -1 && leftposition < 52 && topposition > 283 && topposition < 380)
-      && !(leftposition > 120 && leftposition < 210 && topposition > 164 && topposition < 330)
-      && !(leftposition > 293 && leftposition < 392 && topposition > 287 && topposition < 380)
-        ) {
-          topposition += moveDistance;
-          $player.css('top', `${topposition.toString()}%`);
+        direction = 'down';
+        topposition += moveDistance;
+        if (canMove(leftposition, topposition, direction)) {
+          $player.css('top', `${topposition.toString()}px`);
         }
         walk('down');
         break;
