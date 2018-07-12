@@ -31,7 +31,6 @@ $(function(){
 
   // ** I would make this 1 time out now and clear it after each timeout event
 
-
   //-------------------------- SELECTORS ---------------------------------------
   const $attButtP1A1 = $('.player1Options button[name="attack1"]'); //used for event listeners when game is loaded
   const $attButtP1A2 = $('.player1Options button[name="attack2"]');
@@ -103,6 +102,8 @@ $(function(){
 
   const p1 = new player('',0,0,100); //sets up a new player.
   const p2 = new player('',0,0,100);
+
+  // ** In the future I would look at adding a lot of the functions I've made below to the prototype of the constructor functions above
 
   //--------------------------- ADDITIONAL START PAGE --------------------------
 
@@ -276,8 +277,9 @@ $(function(){
     $('#player1Screen').css('width', '100%');
     $('#player1Screen').css('background-size', '122%');
     $('.codemonImageP1').css('height', '290px');
-    $('.player1Options').css('position', 'absolute');
-    $('.player1Options').css('bottom', '20%');
+    $('.player1Options').css('position', 'relative');
+    $('.player1Options').css('bottom', '55%');
+    $('.player1Options').css('maxWidth', '60%');
     $('.impactAnimationP1').css('margin', '40px 155px');
     $('.impactAnimationP2').css('margin', '40px 155px');
     $('.impactAnimationP2').css('width', '160px');
