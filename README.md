@@ -14,7 +14,7 @@ This was my first project as part of the General Assembly Web Development Immers
 
 ---
 
-## Technologies used
+### Technologies used
 
 * HTML5 + HTML5 Audio
 * SCSS
@@ -123,6 +123,6 @@ as it's a nice callback to the original games.
 
 ---
 
-## Future Features
+### Future Features
 
 If I had more time I would work on make the game mobile responsive also  add more characters and a bigger variety of moves.
