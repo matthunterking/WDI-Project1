@@ -123,6 +123,6 @@ as it's a nice callback to the original games.
 
 ---
 
-## Future features
+## Future Features
 
 If I had more time I would work on make the game mobile responsive also  add more characters and a bigger variety of moves.
