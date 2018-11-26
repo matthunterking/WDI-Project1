@@ -2,7 +2,7 @@
 ---
 
 <a href='http://matthunterking.com/WDI-Project1/'>
-<img style='width: 50%;' src='/screenshots/Logo_codemon.png' alt='logo screenshot'></a>
+<img style='width: 100%;' src='/screenshots/Logo_codemon.png' alt='logo screenshot'></a>
 
 ### Project Overview and Motivation
 Codémon is a simplified version of the 1996 Gameboy game Pokémon Red/Blue. Players select and control one of three Codémon and battle them against each other.
